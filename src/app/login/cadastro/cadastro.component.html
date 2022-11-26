@@ -1,0 +1,162 @@
+<div class="nav-wrapper">
+<nav class="navbar navbar-expand-lg navbar-light" id="navbar-index">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/home">4s</a>
+        <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="../home#section1">System</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../home#section2">Test</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../home#section3">Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/usuario/cadastro']">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/login']">logoff</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</div>
+<div class="wrapper">
+    <div class="box header">
+        <h1>Usuários cadastrados</h1>
+        <div class="input-group">
+            <div class="form-outline">
+              <input id="search-input" type="search" id="form1" class="form-control" placeholder="Search..."/>
+            </div>
+            <button id="search-button" type="button" class="btn btn-primary">
+                <i class="bi bi-search"></i>
+            </button>
+        </div>
+    </div>
+    <div class="box sidebar">
+        <p>Descricao de quantas pessoas</p>
+        <p>Descricao por classe</p>
+        <p>Seu perfil talvez</p>
+        <p>Filtro por classe</p>
+    </div>
+    <div class="box content">
+        <div *ngFor="let user of users" class="document">
+            <div class="hidden-user">
+                <div class="user-id"><p>Id: {{user.line}}</p></div>
+                <div class="user-nome">Nome: {{user.nome}}</div>
+                <div class="icon">
+                    <button type="button" class="btn btn-primary btn-block mb-4" data-bs-toggle="collapse" [attr.data-bs-target]="'#user-content-' + user.line"><i class="bi bi-chevron-down"></i></button>
+                </div>
+            </div>
+            <div id="info" class="collapse shown-user" [attr.id]="'user-content-' + user.line">
+                <form #formUser="ngForm">
+
+                    <!-- Id input -->
+                    <input type="hidden" id="line" name="line" class="form-control"
+                        [(ngModel)]="user.line" #id="ngModel">
+                    
+                    <!-- Cadastro input -->
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="cadastro">Cadastro:</label>
+                      <input type="text" id="cadastro" name="cadastro" class="form-control"
+                        [(ngModel)]="user.cadastro" #cadastro="ngModel">
+                    </div>
+    
+                    <!-- Nome input -->
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="nome">Nome:</label>
+                        <input type="text" id="nome" name="nome" class="form-control"
+                          [(ngModel)]="user.nome" #nome="ngModel">
+                      </div>
+      
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="form3Example4">Senha:</label>
+                      <input type="text" id="senha" name="senha" class="form-control"
+                        [(ngModel)]="user.senha" #senha="ngModel">
+                    </div>
+
+                    <!-- Perfil input -->
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="form3Example4">Perfil:</label>
+                        <select [(ngModel)]='user.perfil' class='form-control' name="perfil" id="perfil">
+                            <option *ngFor="let perfil of perfils" value="{{perfil}}">{{perfil}}</option>
+                        </select>
+                    </div>
+    
+                    <div class="d-flex justify-content-center mb-4">
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-primary btn-block mb-4" data-bs-toggle="collapse" [attr.data-bs-target]="'#user-content-' + user.line" (click)="update(user.line)">
+                            Atualizar
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-block mb-4" data-bs-toggle="collapse" [attr.data-bs-target]="'#user-content-' + user.line" (click)="cancel(user.line)">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-danger btn-block mb-4" data-bs-toggle="collapse" [attr.data-bs-target]="'#user-content-' + user.line" (click)="remove(user.line)">
+                            Remover
+                        </button>
+                    </div>
+                  </form>
+            </div>
+        </div>
+        
+        <div class="document">
+            <div class="hidden-user">
+                <div class="user-id"><p>Id: </p></div>
+                <div class="user-nome">Nome: </div>
+                <div class="icon">
+                    <button type="button" class="btn btn-primary btn-block mb-4" data-bs-toggle="collapse" data-bs-target="#new-user"><i class="bi bi-chevron-down"></i></button>
+                </div>
+            </div>
+            <div class="collapse shown-user" id="new-user">
+                <form #formNewUser="ngForm">
+
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="cadastro">Cadastro:</label>
+                      <input type="text" id="cadastro" name="cadastro" class="form-control"
+                        [(ngModel)]="newUser.cadastro" #cadastro="ngModel">
+                    </div>
+    
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="nome">Nome:</label>
+                        <input type="text" id="nome" name="nome" class="form-control"
+                          [(ngModel)]="newUser.nome" #nome="ngModel">
+                      </div>
+      
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="form3Example4">Senha:</label>
+                      <input type="text" id="senha" name="senha" class="form-control"
+                        [(ngModel)]="newUser.senha" #senha="ngModel">
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="form3Example4">Perfil:</label>
+                        <select [(ngModel)]='newUser.perfil' class='form-control' name="perfil" id="perfil">
+                            <option *ngFor="let perfil of perfils" value="{{perfil}}">{{perfil}}</option>
+                        </select>
+                    </div>
+    
+                    <div class="d-flex justify-content-center mb-4">
+                        <button type="submit" class="btn btn-primary btn-block mb-4" data-bs-toggle="collapse" data-bs-target="#new-user" (click)="add()">
+                            Adicionar
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-block mb-4" data-bs-toggle="collapse" data-bs-target="#new-user" (click)="clean()">
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="foot"></div>

@@ -1,0 +1,86 @@
+<div class="nav-wrapper">
+    <nav class="navbar navbar-expand-lg navbar-light" id="navbar-index">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/home">4s</a>
+            <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="../home#section1">System</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../home#section2">Test</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../home#section3">Data</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/usuario/cadastro']">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/login']">logoff</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    </div>
+    <div class="wrapper">
+        <div class="box header">
+            <h1>Usuários cadastrados</h1>
+        </div>
+        <div class="box sidebar">
+            <div class="input-group">
+                <div class="form-outline">
+                  <input id="search-input" type="search" id="form1" class="form-control" placeholder="Search..."/>
+                </div>
+                <button id="search-button" type="button" class="btn btn-primary">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box content">
+            <div *ngFor="let project of projects" class="document">
+                <div class="hidden-project">
+                    <div class="project-id"><p>Id: {{project.line}}</p></div>
+                    <div class="project-nome">Nome: {{project.nome}}</div>
+                    <div class="icon">
+                        <button type="button" class="btn btn-primary btn-block mb-4" data-bs-toggle="collapse" [attr.data-bs-target]="'#project-content-' + project.line"><i class="bi bi-chevron-down"></i></button>
+                    </div>
+                </div>
+                <!--
+                <div id="info" class="collapse shown-project" [attr.id]="'project-content-' + project.line">
+                    <p>asddas</p>
+                    <form #formProject="ngForm">
+    
+                    </form>
+                </div>
+                -->
+            </div>
+            
+            <div class="document">
+                <div class="hidden-project">
+                    <div class="project-id"><p>Id: </p></div>
+                    <div class="project-nome">Nome: </div>
+                    <div class="icon">
+                        <button type="button" class="btn btn-primary btn-block mb-4" data-bs-toggle="collapse" data-bs-target="#new-project"><i class="bi bi-chevron-down"></i></button>
+                    </div>
+                </div>
+                <!--
+                <div class="collapse shown-project" id="new-project">
+                    <form #formNewProject="ngForm">
+    
+                    </form>
+                </div>
+                -->
+            </div>
+    
+        </div>
+    </div>
+    <div class="foot"></div>
+    
