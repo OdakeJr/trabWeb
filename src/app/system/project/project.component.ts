@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Project } from 'src/app/shared';
 import { ModalProjectComponent } from '../modal-project/modal-project.component';
@@ -13,16 +12,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./project.component.css']
 })
 export class ProjectComponent implements OnInit {
-  @ViewChild('formProject') formProject!: NgForm
-  @ViewChild('formNewProject') formNewProject!: NgForm
-
   projects!: Project[]
 
   constructor(private projectService: ProjectService, public router: Router, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.fillProjects();
-    //this.newProject = new Project()
   }
 
   fillProjects(): void {
@@ -32,38 +27,29 @@ export class ProjectComponent implements OnInit {
     });
   }
 
-  update(line?: number): void {
-    this.projectService.updateProject(this.projects[line!]).subscribe({
+  enable(project: Project):void {
+    project.enabled = true
+    this.projectService.updateProject(project).subscribe({
+      next: (data) => this.projects[project.line!] = project,
+      error: (err) => console.log(err)
+    });
+  }
+
+  remove(project: Project): void {
+    this.projectService.remove(project).subscribe({
       next: (data) => this.fillProjects(),
       error: (err) => console.log(err)
     });
-    this.fillProjects()
-  }
-
-  clean(): void {
-    this.formNewProject.form.reset()
-  }
-
-  add():void {
-    this.projectService.addProject(this.formNewProject.value).subscribe({
-      next: (data) => {console.log(data); this.formNewProject.form.reset(); this.fillProjects()},
-      error: (err) => console.log(err)
-    });
-    this.fillProjects()
-  }
-
-  remove(line?: number): void {
-    console.log("asdasdasd")
-    console.log(this.formProject.value)
-    this.projectService.remove(this.projects[line!]).subscribe({
-      next: (data) => {console.log(data); this.formNewProject.form.reset(); this.fillProjects()},
-      error: (err) => console.log(err)
-    });
-    this.fillProjects()
   }
 
   openModal(project: Project) {
     const modalRef = this.modalService.open(ModalProjectComponent)
     modalRef.componentInstance.project = project
+    modalRef.componentInstance.projects = this.projects
+  }
+
+  openAddModal() {
+    const modalRef = this.modalService.open(ModalProjectComponent)
+    modalRef.componentInstance.projects = this.projects
   }
 }

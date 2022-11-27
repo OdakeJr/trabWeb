@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/app/shared';
 import { ModalProjectComponent } from '../modal-project/modal-project.component';
 import { ProjectService } from '../services/project.service';
@@ -7,14 +7,14 @@ import { ProjectService } from '../services/project.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-mapping',
-  templateUrl: './mapping.component.html',
-  styleUrls: ['./mapping.component.css']
+  selector: 'app-project-folder',
+  templateUrl: './project-folder.component.html',
+  styleUrls: ['./project-folder.component.css']
 })
-export class MappingComponent implements OnInit {
+export class ProjectFolderComponent implements OnInit {
   projects!: Project[]
 
-  constructor(private projectService: ProjectService, public router: Router, private modalService: NgbModal) { }
+  constructor(private projectService: ProjectService, public router: Router, private activatedRoute: ActivatedRoute, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.fillProjects();
@@ -51,5 +51,17 @@ export class MappingComponent implements OnInit {
   openAddModal() {
     const modalRef = this.modalService.open(ModalProjectComponent)
     modalRef.componentInstance.projects = this.projects
+  }
+
+  openMappings():void {
+    this.router.navigate(['system/mapping/' + this.activatedRoute.snapshot.paramMap.get('line')])
+  }
+
+  openRoutines():void {
+    this.router.navigate(['system/routine/' + this.activatedRoute.snapshot.paramMap.get('line')])
+  }
+
+  openConfigurations():void {
+
   }
 }

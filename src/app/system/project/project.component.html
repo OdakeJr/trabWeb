@@ -32,7 +32,7 @@
     </div>
     <div class="wrapper">
         <div class="box header">
-            <h1>Usuários cadastrados</h1>
+            <h1>Projetos</h1>
         </div>
         <div class="box sidebar">
             <div class="input-group">
@@ -45,22 +45,28 @@
             </div>
         </div>
         <div class="box content">
-            <div *ngFor="let project of projects" class="document">
-                <div class="hidden-project">
-                    <div class="project-id"><p>Id: {{project.line}}</p></div>
-                    <div class="project-nome">Nome: {{project.nome}}</div>
-                    <div class="icon">
-                        <button type="button" class="btn btn-primary btn-block mb-4" data-bs-toggle="collapse" [attr.data-bs-target]="'#project-content-' + project.line"><i class="bi bi-chevron-down"></i></button>
+            <div *ngFor="let project of projects" >
+                <div class="document" *ngIf="project.enabled==true;else disabled">
+                    <div class="hidden-project" >
+                        <div class="project-id"><p>Id: {{project.line}}</p></div>
+                        <div class="project-nome">Nome: {{project.nome}}</div>
+                        <div class="icon">
+                            <button type="button" class="btn btn-primary btn-block mb-4" (click)="openModal(project)"><i class="bi bi-chevron-down"></i></button>
+                        </div>
                     </div>
                 </div>
-                <!--
-                <div id="info" class="collapse shown-project" [attr.id]="'project-content-' + project.line">
-                    <p>asddas</p>
-                    <form #formProject="ngForm">
-    
-                    </form>
-                </div>
-                -->
+                <ng-template #disabled>
+                    <div class="document" [attr.disabled]="true">
+                        <div class="hidden-project" >
+                            <div class="project-id"><p>Id: {{project.line}}</p></div>
+                            <div class="project-nome">Nome: {{project.nome}}</div>
+                            <div class="icon">
+                                <button type="button" class="btn btn-primary btn-block mb-4" (click)="remove(project)">Remove</button>
+                                <button type="button" class="btn btn-primary btn-block mb-4" (click)="enable(project)">Enable</button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
             </div>
             
             <div class="document">
@@ -68,19 +74,12 @@
                     <div class="project-id"><p>Id: </p></div>
                     <div class="project-nome">Nome: </div>
                     <div class="icon">
-                        <button type="button" class="btn btn-primary btn-block mb-4" data-bs-toggle="collapse" data-bs-target="#new-project"><i class="bi bi-chevron-down"></i></button>
+                        <button type="button" class="btn btn-primary btn-block mb-4" (click)="openAddModal()"><i class="bi bi-chevron-down"></i></button>
                     </div>
                 </div>
-                <!--
-                <div class="collapse shown-project" id="new-project">
-                    <form #formNewProject="ngForm">
-    
-                    </form>
-                </div>
-                -->
             </div>
     
         </div>
     </div>
-    <div class="foot"></div>
+<div class="foot"></div>
     

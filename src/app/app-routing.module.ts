@@ -6,6 +6,7 @@ import { CadastroComponent } from './login/cadastro/cadastro.component';
 import { ProjectComponent } from './system/project/project.component';
 import { MappingComponent } from './system/mapping/mapping.component';
 import { RoutineComponent } from './system/routine/routine.component';
+import { ProjectFolderComponent } from './system/project-folder/project-folder.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,18 @@ const routes: Routes = [
   },
   {
     path: 'system/routine',
+    component: RoutineComponent
+  },
+  {
+    path: 'system/:line',
+    component: ProjectFolderComponent
+  },
+  {
+    path: 'system/mapping/:line',
+    component: MappingComponent
+  },
+  {
+    path: 'system/routine/:line',
     component: RoutineComponent
   }
 ];

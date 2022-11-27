@@ -6,6 +6,7 @@ import { ProjectComponent } from './project/project.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ModalProjectComponent } from './modal-project/modal-project.component';
+import { ProjectFolderComponent } from './project-folder/project-folder.component';
 
 
 
@@ -14,7 +15,8 @@ import { ModalProjectComponent } from './modal-project/modal-project.component';
     MappingComponent,
     RoutineComponent,
     ProjectComponent,
-    ModalProjectComponent
+    ModalProjectComponent,
+    ProjectFolderComponent
   ],
   imports: [
     CommonModule,

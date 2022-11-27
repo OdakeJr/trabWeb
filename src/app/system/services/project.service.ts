@@ -17,6 +17,7 @@ export class ProjectService {
   }
 
   public updateProject(project: Project): Observable<Project> {
+    console.log(project)
     return this.http.put(`${BASE_URL} + ${project.line}`, project)
   }
 

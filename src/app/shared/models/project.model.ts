@@ -11,6 +11,8 @@ export class Project {
         public configurations?: string[],
         public node?: number,
         public connections?: number[],
-        public keyWords?: string[]
+        public keyWords?: string[],
+        public description?: string,
+        public enabled?: boolean
     ) {}
 } 
