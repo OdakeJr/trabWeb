@@ -35,6 +35,7 @@ export class ModalProjectComponent implements OnInit {
 
   update():void {
     this.project = this.formProject.value
+    this.project.enabled = true
     this.projectService.updateProject(this.project).subscribe({
       next: (data) => this.projects[this.project.line!] = this.project,
       error: (err) => console.log(err)

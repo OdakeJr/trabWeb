@@ -1,7 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital@1&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Stalinist+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 
 .navbar{
@@ -14,50 +13,20 @@
     /* height: 0rem; Não sei pra que e fode o dropdown*/
     min-height: 9vh;
 }
-
 .navbar-brand{
     padding-left: 2.1rem;
     font-size: 1.8em;
     font-family: 'Stalinist One', cursive;
 }
 
-.btn-primary {
-    background-color: #16697A !important;
-    border-color: #16697A;
-}
-
-.btn-primary:hover {
-    opacity: 0.87;
-}
-
-.btn-success {
-    background-color: #9000B3 !important;
-    border-color: #9000B3;
-}
-
-.btn-success:hover {
-    opacity: 0.87;
-}
-
-.centered-text {
-    font-size: 2rem;
-    text-align: center;
-    margin: auto;
-    margin-bottom: 20px;
-    font-family: 'Roboto', sans-serif;
-}
-
 .sidebar {
     grid-area: sidebar;
-    /*
     border-style: solid;
-    */
     border-radius: 5px;
-    padding: 3%;
 }
 
-.user-info-margin {
-    margin-left: 8px;
+.content {
+    grid-area: content;
 }
 
 .header {
@@ -70,47 +39,38 @@
 
 .foot {
     height: 4vh;
-    background-color: #FFFAFF;
-}
-
-.shown-user {
-    background-color: rgba(22, 105, 122, 0.2);
-}
-
-.add-user {
-    background-color: rgba(50, 70, 179, 0.2);
+    background-color: #f2efef;
 }
 
 .nav-wrapper {
     height: 12vh;
-    background-color: #FFFAFF;
+    background-color: #f2efef;
 }
 
-.mapping-id {
-    margin: auto;
-    margin-left: 8px;
+
+
+
+
+
+.project-id {
     grid-area: id;
 }
 
-.mapping-nome {
-    margin: auto;
+.project-nome {
     grid-area: nome;
 }
 
-.mapping-icon {
+.icon {
     grid-area: icon;
-    margin: 8px;
-    /*
     margin-left: auto;
     margin-right: 5px;
-    */
 }
 
 .icon:hover {
     cursor: pointer;
 }
 
-.hidden-mapping {
+.hidden-project {
     display: grid;
     grid-template-columns: 20% 70% 10%;
     grid-template-areas:
@@ -123,6 +83,7 @@
     grid-gap: 10px;
     grid-template-columns: 20vw 38vw 38vw;
     grid-template-areas:
+    "sidebar header header"
     "sidebar content content"
     "sidebar content content"
     "sidebar content content"
@@ -134,35 +95,21 @@
     "sidebar content content"
     "sidebar content content"
     "sidebar content content";
-    background-color: #FFFAFF;
+    background-color: #f2efef;
 }
 
 .content {
-    /*
     border-style: solid;
-    */
     border-radius: 5px;
     padding: 10px;
     font-size: 150%;
     overflow:auto;
-    grid-area: content;
 }
 
 .document {
     border-style: solid;
-    border-width: 1px;
     border-radius: 5px;
     margin: 10px;
-}
-
-.add-btn {
-    float: right;
-    width: 3rem;
-}
-
-.show-btn {
-    float: right;
-    width: 3rem;
 }
 
 @media only screen and (max-height: 550px) {

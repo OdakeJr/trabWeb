@@ -1,7 +1,7 @@
 <div class="nav-wrapper">
     <nav class="navbar navbar-expand-lg navbar-light" id="navbar-index">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/home">4s</a>
+            <a class="navbar-brand" href="/home">WEG</a>
             <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -31,10 +31,13 @@
     </nav>
     </div>
     <div class="wrapper">
+        <!--
         <div class="box header">
-            <h1>Projetos</h1>
+            <h1>Projeto x - Routines</h1>
         </div>
+        -->
         <div class="box sidebar">
+            <label>@Todo: dont really know what to filter</label>
             <div class="input-group">
                 <div class="form-outline">
                   <input id="search-input" type="search" id="form1" class="form-control" placeholder="Search..."/>
@@ -45,24 +48,25 @@
             </div>
         </div>
         <div class="box content">
-            <div *ngFor="let project of projects" >
-                <div class="document" *ngIf="project.enabled==true;else disabled">
+            <h1 class="centered-text">Projeto x - Routines</h1>
+            <div *ngFor="let routine of routines" >
+                <div class="document" *ngIf="routine.enabled==true;else disabled">
                     <div class="hidden-project" >
-                        <div class="project-id"><p>Id: {{project.line}}</p></div>
-                        <div class="project-nome">Nome: {{project.nome}}</div>
-                        <div class="icon">
-                            <button type="button" class="btn btn-primary btn-block mb-4" (click)="openModal(project)"><i class="bi bi-chevron-down"></i></button>
+                        <div class="project-id">Id: {{routine.line}}</div>
+                        <div class="project-nome">Nome: {{routine.nome}}</div>
+                        <div class="project-icon">
+                            <button type="button" class="btn btn-primary btn-block add-btn" (click)="openModal(routine)"><i class="bi bi-chevron-down"></i></button>
                         </div>
                     </div>
                 </div>
                 <ng-template #disabled>
                     <div class="document" [attr.disabled]="true">
                         <div class="hidden-project" >
-                            <div class="project-id"><p>Id: {{project.line}}</p></div>
-                            <div class="project-nome">Nome: {{project.nome}}</div>
+                            <div class="project-id"><p>Id: {{routine.line}}</p></div>
+                            <div class="project-nome">Nome: {{routine.nome}}</div>
                             <div class="icon">
-                                <button type="button" class="btn btn-primary btn-block mb-4" (click)="remove(project)">Remove</button>
-                                <button type="button" class="btn btn-primary btn-block mb-4" (click)="enable(project)">Enable</button>
+                                <button type="button" class="btn btn-primary btn-block mb-4" (click)="remove(routine)">Remove</button>
+                                <button type="button" class="btn btn-primary btn-block mb-4" (click)="enable(routine)">Enable</button>
                             </div>
                         </div>
                     </div>
@@ -71,10 +75,10 @@
             
             <div class="document">
                 <div class="hidden-project">
-                    <div class="project-id"><p>Id: </p></div>
+                    <div class="project-id">Id: {{routines.length}}</div>
                     <div class="project-nome">Nome: </div>
-                    <div class="icon">
-                        <button type="button" class="btn btn-primary btn-block mb-4" (click)="openAddModal()"><i class="bi bi-chevron-down"></i></button>
+                    <div class="project-icon">
+                        <button type="button" class="btn btn-success btn-block show-btn" (click)="openAddModal()">+</button>
                     </div>
                 </div>
             </div>

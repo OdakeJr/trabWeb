@@ -13,11 +13,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ProjectFolderComponent implements OnInit {
   projects!: Project[]
+  projectId!: Number
 
   constructor(private projectService: ProjectService, public router: Router, private activatedRoute: ActivatedRoute, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.fillProjects();
+    this.projectId = parseInt(this.activatedRoute.snapshot.paramMap.get('line')!)
   }
 
   fillProjects(): void {

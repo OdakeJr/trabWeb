@@ -1,6 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital@1&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Stalinist+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 
 .navbar{
@@ -21,12 +22,19 @@
 
 .sidebar {
     grid-area: sidebar;
+    /*
     border-style: solid;
+    */
     border-radius: 5px;
+    padding: 3%;
 }
 
-.content {
-    grid-area: content;
+.centered-text {
+    font-size: 2rem;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
 }
 
 .header {
@@ -39,31 +47,50 @@
 
 .foot {
     height: 4vh;
-    background-color: #f2efef;
+    background-color: #FFFAFF;
 }
 
 .nav-wrapper {
     height: 12vh;
-    background-color: #f2efef;
+    background-color: #FFFAFF;
 }
 
+.btn-primary {
+    background-color: #16697A !important;
+    border-color: #16697A;
+}
 
+.btn-primary:hover {
+    opacity: 0.87;
+}
 
+.btn-success {
+    background-color: #9000B3 !important;
+    border-color: #9000B3;
+}
 
-
+.btn-success:hover {
+    opacity: 0.87;
+}
 
 .project-id {
+    margin: auto;
+    margin-left: 8px;
     grid-area: id;
 }
 
 .project-nome {
+    margin: auto;
     grid-area: nome;
 }
 
-.icon {
+.project-icon {
     grid-area: icon;
+    margin: 8px;
+    /*
     margin-left: auto;
     margin-right: 5px;
+    */
 }
 
 .icon:hover {
@@ -72,7 +99,7 @@
 
 .hidden-project {
     display: grid;
-    grid-template-columns: 20% 70% 10%;
+    grid-template-columns: 20% 68% 12%;
     grid-template-areas:
     "id nome icon"
 }
@@ -83,7 +110,6 @@
     grid-gap: 10px;
     grid-template-columns: 20vw 38vw 38vw;
     grid-template-areas:
-    "sidebar header header"
     "sidebar content content"
     "sidebar content content"
     "sidebar content content"
@@ -95,21 +121,35 @@
     "sidebar content content"
     "sidebar content content"
     "sidebar content content";
-    background-color: #f2efef;
+    background-color: #FFFAFF;
 }
 
 .content {
+    /*
     border-style: solid;
+    */
     border-radius: 5px;
     padding: 10px;
     font-size: 150%;
     overflow:auto;
+    grid-area: content;
 }
 
 .document {
     border-style: solid;
+    border-width: 1px;
     border-radius: 5px;
     margin: 10px;
+}
+
+.add-btn {
+    float: right;
+    width: 3rem;
+}
+
+.show-btn {
+    float: right;
+    width: 3rem;
 }
 
 @media only screen and (max-height: 550px) {

@@ -16,8 +16,11 @@ export class ProjectService {
     return this.http.get<Project[]>(BASE_URL)
   }
 
+  public getProjectByLine(line: string): Observable<Project[]> {
+    return this.http.get<Project[]>(BASE_URL+line)
+  }
+
   public updateProject(project: Project): Observable<Project> {
-    console.log(project)
     return this.http.put(`${BASE_URL} + ${project.line}`, project)
   }
 

@@ -7,6 +7,10 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ModalProjectComponent } from './modal-project/modal-project.component';
 import { ProjectFolderComponent } from './project-folder/project-folder.component';
+import { ModalMappingComponent } from './modal-mapping/modal-mapping.component';
+import { ModalRoutineComponent } from './modal-routine/modal-routine.component';
+import { TagComponent } from './tag/tag.component';
+import { ModalTagComponent } from './modal-tag/modal-tag.component';
 
 
 
@@ -16,7 +20,11 @@ import { ProjectFolderComponent } from './project-folder/project-folder.componen
     RoutineComponent,
     ProjectComponent,
     ModalProjectComponent,
-    ProjectFolderComponent
+    ProjectFolderComponent,
+    ModalMappingComponent,
+    ModalRoutineComponent,
+    TagComponent,
+    ModalTagComponent
   ],
   imports: [
     CommonModule,

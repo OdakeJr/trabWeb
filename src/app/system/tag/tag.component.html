@@ -31,50 +31,54 @@
     </nav>
     </div>
     <div class="wrapper">
-        <!--
         <div class="box header">
-            <h1>Projeto x</h1>
+            <h1>Projeto x - Routine x - Tags</h1>
         </div>
-        --> 
         <div class="box sidebar">
-            <div class="user-info-margin">
-                <label>Nome: Edson Odake</label><br>
-                <label>Cadastro: 7881</label><br>
-                <label>Perfil: Administrador</label>
-            </div>
-            <hr>
-            <div class="user-info-margin">
-                <label>Quantidade de Mappings: 6</label><br>
-                <label>Quantidade de Rotinas: 27</label><br>
-                <label>Quantidade de configurações: 0</label>
+            <div class="input-group">
+                <div class="form-outline">
+                  <input id="search-input" type="search" id="form1" class="form-control" placeholder="Search..."/>
+                </div>
+                <button id="search-button" type="button" class="btn btn-primary">
+                    <i class="bi bi-search"></i>
+                </button>
             </div>
         </div>
         <div class="box content">
-            <h1 class="centered-text">Projeto {{projectId}}</h1>
+            <div *ngFor="let tag of tags" >
+                <div class="document" *ngIf="tag.enabled==true;else disabled">
+                    <div class="hidden-project" >
+                        <div class="project-id"><p>Id: {{tag.line}}</p></div>
+                        <div class="project-nome">Nome: {{tag.nome}}</div>
+                        <div class="icon">
+                            <button type="button" class="btn btn-primary btn-block mb-4" (click)="openModal(tag)"><i class="bi bi-chevron-down"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #disabled>
+                    <div class="document" [attr.disabled]="true">
+                        <div class="hidden-project" >
+                            <div class="project-id"><p>Id: {{tag.line}}</p></div>
+                            <div class="project-nome">Nome: {{tag.nome}}</div>
+                            <div class="icon">
+                                <button type="button" class="btn btn-primary btn-block mb-4" (click)="remove(tag)">Remove</button>
+                                <button type="button" class="btn btn-primary btn-block mb-4" (click)="enable(tag)">Enable</button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+            
             <div class="document">
-                <div class="hidden-project" >
-                    <div class="folder-name">Mappings</div>
-                    <div class="folder-icon">
-                        <button type="button" class="btn btn-primary btn-block entrar-btn" (click)="openMappings()">Entrar</button>
+                <div class="hidden-project">
+                    <div class="project-id"><p>Id: add</p></div>
+                    <div class="project-nome">Nome: </div>
+                    <div class="icon">
+                        <button type="button" class="btn btn-primary btn-block mb-4" (click)="openAddModal()"><i class="bi bi-chevron-down"></i></button>
                     </div>
                 </div>
             </div>
-            <div class="document">
-                <div class="hidden-project" >
-                    <div class="folder-name">Routines</div>
-                    <div class="folder-icon">
-                        <button type="button" class="btn btn-primary btn-block entrar-btn" (click)="openRoutines()">Entrar</button>
-                    </div>
-                </div>
-            </div>
-            <div class="document">
-                <div class="hidden-project" >
-                    <div class="folder-name">Configurations</div>
-                    <div class="folder-icon">
-                        <button type="button" class="btn btn-primary btn-block entrar-btn" (click)="openConfigurations()">Entrar</button>
-                    </div>
-                </div>
-            </div>
+    
         </div>
     </div>
 <div class="foot"></div>

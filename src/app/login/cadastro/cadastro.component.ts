@@ -13,16 +13,23 @@ import * as PerfilUtil from 'src/app/shared/globals/perfil-util';
 export class CadastroComponent implements OnInit {
   @ViewChild('formUser') formCliente!: NgForm
   @ViewChild('formNewUser') formNewCliente!: NgForm
+  @ViewChild('formFilter') formFilter!: NgForm
   usersOriginal!: User[]
-  users!: User[]
+  users: User[] = []
   newUser!: User
   perfils = PerfilUtil.perfils
+
+  usersFiltered: User[] = []
+  userFilter!: User
+  idMin!: Number
+  idMax!: Number
 
   constructor(private cadastroService: CadastroService, public router: Router) { }
 
   ngOnInit(): void {
     this.fillUsers();
     this.newUser = new User()
+    this.userFilter = new User()
   }
 
   fillUsers(): void {
@@ -31,6 +38,16 @@ export class CadastroComponent implements OnInit {
       error: (err) => console.log(err)
     });
   }
+
+  filter(): void {
+    //Implementar filtro
+  }
+
+  //---------------------------------------
+
+  //@Todo: Login
+
+  //----------------------
 
   update(line?: number): void {
     this.cadastroService.updateUser(this.users[line!]).subscribe({
@@ -57,7 +74,6 @@ export class CadastroComponent implements OnInit {
   }
 
   remove(line?: number): void {
-    console.log("asdasdasd")
     console.log(this.formCliente.value)
     this.cadastroService.remove(this.users[line!]).subscribe({
       next: (data) => {console.log(data); this.formNewCliente.form.reset(); this.fillUsers()},

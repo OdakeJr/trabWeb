@@ -1,6 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital@1&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Stalinist+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 
 .navbar{
@@ -21,12 +22,11 @@
 
 .sidebar {
     grid-area: sidebar;
+    /*
     border-style: solid;
+    */
     border-radius: 5px;
-}
-
-.content {
-    grid-area: content;
+    padding: 3%;
 }
 
 .header {
@@ -39,19 +39,13 @@
 
 .foot {
     height: 4vh;
-    background-color: #f2efef;
+    background-color: #FFFAFF;
 }
 
 .nav-wrapper {
     height: 12vh;
-    background-color: #f2efef;
+    background-color: #FFFAFF;
 }
-
-
-
-
-
-
 .project-id {
     grid-area: id;
 }
@@ -60,7 +54,7 @@
     grid-area: nome;
 }
 
-.icon {
+.folder-icon {
     grid-area: icon;
     margin-left: auto;
     margin-right: 5px;
@@ -72,9 +66,18 @@
 
 .hidden-project {
     display: grid;
-    grid-template-columns: 20% 70% 10%;
+    grid-template-columns: 80% 20%;
     grid-template-areas:
-    "id nome icon"
+    "id icon"
+}
+
+.folder-icon {
+    grid-area: icon;
+    margin: 8px;
+    /*
+    margin-left: auto;
+    margin-right: 5px;
+    */
 }
 
 .wrapper {
@@ -83,7 +86,6 @@
     grid-gap: 10px;
     grid-template-columns: 20vw 38vw 38vw;
     grid-template-areas:
-    "sidebar header header"
     "sidebar content content"
     "sidebar content content"
     "sidebar content content"
@@ -95,21 +97,51 @@
     "sidebar content content"
     "sidebar content content"
     "sidebar content content";
-    background-color: #f2efef;
+    background-color: #FFFAFF;
+}
+
+.folder-name {
+    margin: auto;
+}
+
+.centered-text {
+    font-size: 2rem;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
 }
 
 .content {
+    /*
     border-style: solid;
+    */
     border-radius: 5px;
     padding: 10px;
     font-size: 150%;
     overflow:auto;
+    grid-area: content;
+}
+
+.user-info-margin {
+    margin-left: 8px;
 }
 
 .document {
     border-style: solid;
+    border-width: 1px;
     border-radius: 5px;
     margin: 10px;
+}
+
+.entrar-btn {
+    float: right;
+    width: 6rem;
+}
+
+.btn-primary {
+    background-color: #16697A !important;
+    border-color: #16697A;
 }
 
 @media only screen and (max-height: 550px) {

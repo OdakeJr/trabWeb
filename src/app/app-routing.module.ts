@@ -7,6 +7,7 @@ import { ProjectComponent } from './system/project/project.component';
 import { MappingComponent } from './system/mapping/mapping.component';
 import { RoutineComponent } from './system/routine/routine.component';
 import { ProjectFolderComponent } from './system/project-folder/project-folder.component';
+import { TagComponent } from './system/tag/tag.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,10 @@ const routes: Routes = [
   {
     path: 'system/routine/:line',
     component: RoutineComponent
+  },
+  {
+    path: 'system/:line/routine/:routineLine',
+    component: TagComponent
   }
 ];
 

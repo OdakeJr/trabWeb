@@ -14,10 +14,18 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class ProjectComponent implements OnInit {
   projects!: Project[]
 
+  idMin!: Number
+  idMax!: Number
+  nomeFilter!: string
+
   constructor(private projectService: ProjectService, public router: Router, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.fillProjects();
+  }
+
+  filter() {
+
   }
 
   fillProjects(): void {
