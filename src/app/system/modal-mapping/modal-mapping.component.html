@@ -1,25 +1,19 @@
 <div *ngIf="mapping==null;else updateTag">
     <div class="modal-header" >
-        <button type="button" class="close" aria-label="Fechar" (click)="activeModal.dismiss()">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="modalLabel">Algo</h4>
+        <label>Cadastro de projeto</label>
+        <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
     </div>
     <div class="modal-body text-center">
         <form #formNewMapping="ngForm">
+            //@Todo: Implementar line no back
             <div class="form-outline mb-4">
-              <label class="form-label" for="line">line:</label>
-              <input type="text" id="line" name="line" class="form-control"
-                [(ngModel)]="newMapping.line" #line="ngModel">
-            </div>
-            <div class="form-outline mb-4">
-                <label class="form-label" for="nome">nome:</label>
-                <input type="text" id="nome" name="nome" class="form-control"
+                <label class="form-label" for="nome">Nome</label>
+                <input placeholder="Enter name" type="text" id="nome" name="nome" class="form-control"
                   [(ngModel)]="newMapping.nome" #nome="ngModel">
             </div>
             <div class="form-outline mb-4">
-                <label class="form-label" for="mapping">mapping:</label>
-                <input type="text" id="mapping" name="mapping" class="form-control"
+                <label class="form-label" for="mapping">Mapping</label>
+                <input placeholder="Enter Mapping" type="text" id="mapping" name="mapping" class="form-control"
                   [(ngModel)]="newMapping.mapping" #nome="ngModel">
             </div>
         </form>
@@ -32,23 +26,21 @@
 
 <ng-template #updateTag>
     <div class="modal-header" >
-        <button type="button" class="close" aria-label="Fechar" (click)="activeModal.dismiss()">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="modalLabel">Algo</h4>
+        <label>Cadastro de projeto</label>
+        <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
     </div>
     <div class="modal-body text-center">
         <form #formMapping="ngForm">
+            //@Todo: Implementar line no back
             <div class="form-outline mb-4">
-                <label class="form-label" for="line">line:</label>
-                <input type="text" id="line" name="line" class="form-control"
-                  [(ngModel)]="mappingToUpdate.line" #line="ngModel">
-              </div>
-  
-            <div class="form-outline mb-4">
-                <label class="form-label" for="nome">nome:</label>
+                <label class="form-label" for="nome">Nome</label>
                 <input type="text" id="nome" name="nome" class="form-control"
                 [(ngModel)]="mappingToUpdate.nome" #nome="ngModel">
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" for="mapping">Mapping</label>
+                <input placeholder="Enter Mapping" type="text" id="mapping" name="mapping" class="form-control"
+                  [(ngModel)]="mappingToUpdate.mapping" #nome="ngModel">
             </div>
         </form>
     </div>

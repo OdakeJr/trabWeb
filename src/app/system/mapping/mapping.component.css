@@ -93,7 +93,10 @@
 }
 
 .mapping-nome {
+    /*
     margin: auto;
+    */
+    margin: auto 0;
     grid-area: nome;
 }
 
