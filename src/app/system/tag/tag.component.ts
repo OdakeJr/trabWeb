@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Routine, Project } from 'src/app/shared';
-import { BaseTag } from 'src/app/shared/models/base-tag.model';
+import { Routine, Project, TagEnum, One } from 'src/app/shared';
+import { BaseTag } from 'src/app/shared/models/tags/base-tag.model';
 import { ModalRoutineComponent } from '../modal-routine/modal-routine.component';
 import { ModalTagComponent } from '../modal-tag/modal-tag.component';
 import { ProjectService } from '../services/project.service';
+import { OneTagModalComponent } from '../tag-modals/one-tag-modal/one-tag-modal.component';
+import { ThreeTagModalComponent } from '../tag-modals/three-tag-modal/three-tag-modal.component';
+import { TwoTagModalComponent } from '../tag-modals/two-tag-modal/two-tag-modal.component';
 
 @Component({
   selector: 'app-tag',
@@ -13,7 +16,9 @@ import { ProjectService } from '../services/project.service';
   styleUrls: ['./tag.component.css']
 })
 export class TagComponent implements OnInit {
-  tags!: BaseTag[]
+  selectedTag: string = ""
+  listOfTagName: string[] = []
+  tags: BaseTag[] = []
   routines: Routine[] = []
   routine!: Routine
   project!: Project
@@ -22,6 +27,18 @@ export class TagComponent implements OnInit {
 
   ngOnInit(): void {
     this.fillTags();
+    this.fillListOfTagName();
+    console.log(this.project)
+    console.log(this.routines)
+    console.log(this.routine)
+    console.log(this.tags)
+  }
+
+  fillListOfTagName(): void {
+    for (const value in TagEnum) {
+      console.log(value)
+      this.listOfTagName.push(value)
+    }
   }
 
   updateProjectLocally() {
@@ -46,12 +63,15 @@ export class TagComponent implements OnInit {
     this.project = data[0]
     this.routines = data[0].routines!
     this.routine = this.routines[Number(this.activatedRoute.snapshot.paramMap.get('routineLine')!)]!
-    this.tags = this.routine.tag!
+    if(this.routine.tag!=null) {
+      this.tags = this.routine.tag
+    }
   }
 
   fillTags(): void {
     this.projectService.getProjectByLine(this.activatedRoute.snapshot.paramMap.get('line')!).subscribe({
       next: (data) => {
+        console.log(data)
         this.setRetrievedValues(data)
       },
       error: (err) => console.log(err)
@@ -86,8 +106,17 @@ export class TagComponent implements OnInit {
     });
   }
 
+  /*
+  for (const value in TagEnum) {
+      this.listOfTagName.push(value)
+    }
+  */
+
   openModal(tag: BaseTag) {
-    const modalRef = this.modalService.open(ModalTagComponent)
+    const modalRef = this.modalService.open(this.getTagName(tag.nome!))
+    //let modalRef
+    //eval("modalRef = this.modalService.open(" + tag.nome + "Component)")
+    //eval("modalRef = this.modalService.open(ModalTagComponent)")
     modalRef.componentInstance.tag = tag
     modalRef.componentInstance.tags = this.tags
     modalRef.componentInstance.routine = this.routine
@@ -96,10 +125,31 @@ export class TagComponent implements OnInit {
   }
 
   openAddModal() {
-    const modalRef = this.modalService.open(ModalTagComponent)
-    modalRef.componentInstance.tags = this.tags
-    modalRef.componentInstance.routine = this.routine
-    modalRef.componentInstance.routines = this.routines
-    modalRef.componentInstance.project = this.project
+    if (this.selectedTag!="") {
+      const modalRef = this.modalService.open(this.getTagName(this.selectedTag))
+      //let modalRef = this.modalService.open(null)
+      //eval("modalRef = this.modalService.open(" + this.selectedTag + "Component)")
+      modalRef.componentInstance.selectedTag = this.selectedTag
+      modalRef.componentInstance.tags = this.tags
+      modalRef.componentInstance.routine = this.routine
+      modalRef.componentInstance.routines = this.routines
+      modalRef.componentInstance.project = this.project
+    } else {
+      alert("Choose a Tag Type")
+    }
+  }
+
+
+
+  getTagName(tagName: string): any{
+    switch (tagName) {
+      case "OneTag":
+        return OneTagModalComponent
+      case "TwoTag":
+          return TwoTagModalComponent
+      case "ThreeTag":
+          return ThreeTagModalComponent
+    }
+    return ModalTagComponent
   }
 }

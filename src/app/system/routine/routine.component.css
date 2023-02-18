@@ -32,6 +32,11 @@
     opacity: 0.87;
 }
 
+.disabled-btn {
+    float: right;
+    width: 6em;
+    margin-left: 4px;
+}
 
 .navbar-brand{
     padding-left: 2.1rem;
@@ -112,7 +117,7 @@
 
 .hidden-project {
     display: grid;
-    grid-template-columns: 20% 70% 10%;
+    grid-template-columns: 20% 50% 30%;
     grid-template-areas:
     "id nome icon"
 }

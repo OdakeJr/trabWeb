@@ -34,23 +34,48 @@ export class ModalProjectComponent implements OnInit {
   }
 
   update():void {
-    this.project = this.formProject.value
-    this.project.enabled = true
+    this.setProjectObj()
     this.projectService.updateProject(this.project).subscribe({
       next: (data) => this.projects[this.project.line!] = this.project,
       error: (err) => console.log(err)
     });
     this.activeModal.close()
   }
+
+  setProjectObj():void {
+    this.project = this.formProject.value
+    this.project.enabled = true
+    this.project.line = this.projectToUpdate.line
+    console.log(this.formProject.value.keyWords)
+    console.log(this.formProject.value.connections)
+    try {
+      this.project.keyWords = this.formProject.value.keyWords!.split(",")
+    } catch (error) {
+      //@Todo: refactor this: try catch only used to check if the statement is a array or string
+    }
+
+    try {
+      this.project.connections = this.formProject.value.connections!.split(",").map((el: string) => {return Number(el)})
+    } catch (error) {
+      //@Todo: refactor this: try catch only used to check if the statement is a array or string
+    }
+  }
   
   add():void {
-    this.newProject = this.formNewProject.value
-    this.newProject.enabled = true
+    this.setNewProjectObj()
     this.projectService.addProject(this.newProject).subscribe({
       next: (data) => this.projects.push(this.newProject),
       error: (err) => console.log(err)
     });
     this.activeModal.close()
+  }
+
+  setNewProjectObj():void {
+    this.newProject = this.formNewProject.value
+    this.newProject.enabled = true
+    this.newProject.keyWords = this.formNewProject.value.keyWords!.split(",")
+    this.newProject.connections = this.formNewProject.value.connections!.split(",").map((el: string) => {return Number(el)})
+    this.newProject.line = this.projects.length
   }
 
   disable():void {

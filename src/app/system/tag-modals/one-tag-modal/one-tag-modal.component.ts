@@ -1,24 +1,25 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Routine, Project, Mapping, One } from 'src/app/shared';
-import { BaseTag } from 'src/app/shared/models/tags/base-tag.model';
-import { ProjectService } from '../services/project.service';
+import { BaseTag, One, Project, Routine } from 'src/app/shared';
+import { ProjectService } from '../../services/project.service';
 
 @Component({
-  selector: 'app-modal-tag',
-  templateUrl: './modal-tag.component.html',
-  styleUrls: ['./modal-tag.component.css']
+  selector: 'app-one-tag-modal',
+  templateUrl: './one-tag-modal.component.html',
+  styleUrls: ['./one-tag-modal.component.css']
 })
-export class ModalTagComponent implements OnInit {
-  @Input() tag!: BaseTag
+export class OneTagModalComponent implements OnInit {
+  @Input() tag!: One
   @Input() tags!: BaseTag[]
   @Input() routine!: Routine
   @Input() routines!: Routine[]
   @Input() project!: Project
+  @Input() selectedTag!: string
   
-  tagToUpdate!: BaseTag
-  newTag!: BaseTag
+  tagToUpdate!: One
+  newTag!: One
+  enableFields!: boolean
 
   @ViewChild('formTag') formTag!: NgForm
   @ViewChild('formNewTag') formNewTag!: NgForm
@@ -26,8 +27,13 @@ export class ModalTagComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal, private projectService: ProjectService) { }
 
   ngOnInit(): void {
-    this.newTag = new BaseTag()
+    this.initiateNewTag()
     this.initiateTagToUpdate()
+  }
+
+  initiateNewTag(): void {
+    this.newTag = new BaseTag()
+    this.newTag.nome = this.selectedTag
   }
 
   updateProjectLocally() {
@@ -58,8 +64,10 @@ export class ModalTagComponent implements OnInit {
   }
 
   update():void {
+    let line = this.tag.line
     this.tag = this.formTag.value
     this.tag.enabled = true
+    this.tag.line = line
     this.updateTagLocally(this.tag)
     this.updateProjectLocally()
 
@@ -74,7 +82,6 @@ export class ModalTagComponent implements OnInit {
     this.newTag = this.formNewTag.value
     this.newTag.enabled = true
     this.newTag.line = this.tags.length
-    console.log(this.newTag)
     this.tags.push(this.newTag)
     this.routine.tag = this.tags
     this.updateProjectLocally()

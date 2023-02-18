@@ -35,6 +35,7 @@
                     [(ngModel)]="user.senha" #senha="ngModel">
                     <div>
                         <p class="aviso">Se necessário solicitar cadastro ao responsável</p>
+                        <p *ngIf="incorrect" class="aviso warning">Login ou senha incorreta! Tente novamente</p>
                     </div>
                 </div>
 

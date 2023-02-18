@@ -64,7 +64,9 @@ export class MappingComponent implements OnInit {
     this.projectService.getProjectByLine(this.activatedRoute.snapshot.paramMap.get('line')!).subscribe({
       next: (data) => {
         this.project = data[0]
-        this.mappings = data[0].mappings!//this.stringToObj(data.mappings!)
+        if(data[0].mappings!=null) {
+          this.mappings = data[0].mappings//this.stringToObj(data.mappings!)
+        }
       },
       error: (err) => console.log(err)
     });
@@ -111,6 +113,8 @@ export class MappingComponent implements OnInit {
   }
 
   openAddModal() {
+    console.log(this.mappings)
+    console.log(this.project)
     const modalRef = this.modalService.open(ModalMappingComponent)
     modalRef.componentInstance.mappings = this.mappings
     modalRef.componentInstance.project = this.project

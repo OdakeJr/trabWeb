@@ -12,15 +12,15 @@
             </div>
 
             <div class="row mb-4">
-                <div class="col-md-3">
+                <div class="form-outline col-md-3">
                     <label class="form-label" for="node">Node</label>
-                    <input placeholder="Node" type="text" id="node" name="description" class="form-control"
+                    <input placeholder="Node" type="number" id="node" name="node" class="form-control"
                     [(ngModel)]="newProject.node" #node="ngModel">
                 </div>
 
-                <div class="col-md-9">
+                <div class="form-outline col-md-9">
                     <label class="form-label" for="connections">Connections</label>
-                    <input placeholder="Enter connections" type="text" id="connections" name="description" class="form-control"
+                    <input placeholder="Enter connections" type="text" id="connections" name="connections" class="form-control"
                     [(ngModel)]="newProject.connections" #connections="ngModel">
                 </div>
             </div>
@@ -33,7 +33,7 @@
 
             <div class="form-outline mb-4">
                 <label class="form-label" for="keyWords">KeyWords</label>
-                <input placeholder="Enter keyWords" type="text" id="keyWords" name="description" class="form-control"
+                <input placeholder="Enter keyWords" type="text" id="keyWords" name="keyWords" class="form-control"
                   [(ngModel)]="newProject.keyWords" #keyWords="ngModel">
             </div>
         </form>
@@ -58,15 +58,15 @@
             </div>
 
             <div class="row mb-4">
-                <div class="col-md-3">
+                <div class="form-outline col-md-3">
                     <label class="form-label" for="node">Node</label>
-                    <input placeholder="Node" type="text" id="node" name="description" class="form-control"
+                    <input placeholder="Node" type="number" id="node" name="node" class="form-control"
                     [(ngModel)]="projectToUpdate.node" #node="ngModel">
                 </div>
 
-                <div class="col-md-9">
+                <div class="form-outline col-md-9">
                     <label class="form-label" for="connections">Connections</label>
-                    <input placeholder="Enter connections" type="text" id="connections" name="description" class="form-control"
+                    <input placeholder="Enter connections" type="text" id="connections" name="connections" class="form-control"
                     [(ngModel)]="projectToUpdate.connections" #connections="ngModel">
                 </div>
             </div>
@@ -79,7 +79,7 @@
 
             <div class="form-outline mb-4">
                 <label class="form-label" for="keyWords">KeyWords</label>
-                <input placeholder="Enter keyWords" type="text" id="keyWords" name="description" class="form-control"
+                <input placeholder="Enter keyWords" type="text" id="keyWords" name="keyWords" class="form-control"
                   [(ngModel)]="projectToUpdate.keyWords" #keyWords="ngModel">
             </div>
         </form>

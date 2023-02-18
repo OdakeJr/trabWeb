@@ -2,7 +2,6 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Mapping, Project, Routine } from 'src/app/shared';
-import { BaseTag } from 'src/app/shared/models/base-tag.model';
 import { ProjectService } from '../services/project.service';
 
 @Component({
@@ -24,7 +23,6 @@ export class ModalRoutineComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal, private projectService: ProjectService) { }
 
   ngOnInit(): void {
-    console.log(this.routine)
     this.newRoutine = new Routine()
     this.initiateRoutineToUpdate()
   }
@@ -55,8 +53,10 @@ export class ModalRoutineComponent implements OnInit {
   }
 
   update():void {
+    let line = this.routine.line
     this.routine = this.formRoutine.value
     this.routine.enabled = true
+    this.routine.line = line
     this.updateRoutineLocally(this.routine)
     this.updateProjectLocally()
 
@@ -71,9 +71,9 @@ export class ModalRoutineComponent implements OnInit {
     this.newRoutine = this.formNewRoutine.value
     this.newRoutine.enabled = true
     this.newRoutine.tag = []
+    this.newRoutine.line = this.routines.length
     this.routines.push(this.newRoutine)
     //this.updateProjectLocally()
-    console.log(this.project)
     this.project.routines = this.routines
 
     console.log(JSON.stringify(this.routines))

@@ -43,7 +43,9 @@ export class RoutineComponent implements OnInit {
     this.projectService.getProjectByLine(this.activatedRoute.snapshot.paramMap.get('line')!).subscribe({
       next: (data) => {
         this.project = data[0]
-        this.routines = data[0].routines!//this.stringToObj(data.mappings!)
+        if(data[0].routines!=null) {
+          this.routines = data[0].routines//this.stringToObj(data.mappings!)
+        }
       },
       error: (err) => console.log(err)
     });
@@ -86,7 +88,6 @@ export class RoutineComponent implements OnInit {
 
   openAddModal() {
     const modalRef = this.modalService.open(ModalRoutineComponent)
-    console.log("Adding")
     modalRef.componentInstance.routines = this.routines
     modalRef.componentInstance.project = this.project
   }

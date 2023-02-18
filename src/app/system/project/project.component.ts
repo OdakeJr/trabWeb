@@ -36,18 +36,24 @@ export class ProjectComponent implements OnInit {
   }
 
   enable(project: Project):void {
-    project.enabled = true
-    this.projectService.updateProject(project).subscribe({
-      next: (data) => this.projects[project.line!] = project,
-      error: (err) => console.log(err)
-    });
+    let text = "Tem certeza que deseja reabilitar esse projeto?";
+    if (confirm(text) == true) {
+      project.enabled = true
+      this.projectService.updateProject(project).subscribe({
+        next: (data) => this.projects[project.line!] = project,
+        error: (err) => console.log(err)
+      });
+    }
   }
 
   remove(project: Project): void {
-    this.projectService.remove(project).subscribe({
-      next: (data) => this.fillProjects(),
-      error: (err) => console.log(err)
-    });
+    let text = "Tem certeza que deseja deletar esse projeto?";
+    if (confirm(text) == true) {
+      this.projectService.remove(project).subscribe({
+        next: (data) => this.fillProjects(),
+        error: (err) => console.log(err)
+      });
+    }
   }
 
   openModal(project: Project) {

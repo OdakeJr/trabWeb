@@ -73,7 +73,7 @@
             </form>
         </div>
         <div class="box content">
-            <h1 class="centered-text">Projeto x - Mapping</h1>
+            <h1 class="centered-text">Projeto {{project.line}} - Mapping</h1>
             <div class="document">
                 <div class="hidden-mapping">
                     <div class="mapping-id">Id: {{mappings.length}}</div>
@@ -98,9 +98,9 @@
                         <div class="hidden-mapping" >
                             <div class="mapping-id">Id: {{mapping.line}}</div>
                             <div class="mapping-nome">Nome: {{mapping.nome}}</div>
-                            <div class="icon">
-                                <button type="button" class="btn btn-primary btn-block mb-4" (click)="remove(mapping)">Remove</button>
-                                <button type="button" class="btn btn-primary btn-block mb-4" (click)="enable(mapping)">Enable</button>
+                            <div class="mapping-icon">
+                                <button type="button" class="btn btn-danger btn-block disabled-btn" (click)="remove(mapping)">Remove</button>
+                                <button type="button" class="btn btn-primary btn-block disabled-btn" (click)="enable(mapping)">Enable</button>
                             </div>
                         </div>
                     </div>

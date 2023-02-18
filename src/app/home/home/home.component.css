@@ -34,6 +34,7 @@ section{
 h1{
     text-align: center;
 }
+
 h2{
     text-align: center;
 }
@@ -70,14 +71,14 @@ h2{
     margin-right: auto;
 } 
 
-.weather{
+.system{
     height: 30vh;
     /* border-bottom: 3px double rgba(0, 183, 255, 0.753); */
 }
-.weather h1{
+.system h1{
     padding-top: 9vh ;
 }
-.weather h3{
+.system h3{
     text-align: center;
 }
 .memberImg{
@@ -89,6 +90,85 @@ h2{
     /* height: 60vh; */
     /* border-bottom: 3px double white; */
 }
+
+.right {
+    /*
+    position: absolute;
+    top: 30%;
+    right: 6em;
+    */
+    margin-right: 9em;
+    margin-left: auto;
+    margin-top: 10%;
+    width: 36em;
+    background-color: rgba(66, 138, 185, 0.54);/*rgba(13, 166, 250, 0.3);*//* rgba(169, 211, 221, 0.54);*/
+    border-radius: 1em;
+    border: 1px solid rgba(66, 138, 185, 1);
+    padding: 10px;
+}
+
+.right:hover {
+    background-color: rgba(66, 138, 185, 0.45);
+    cursor: pointer;
+}
+
+.right-data {
+    /*
+    position: absolute;
+    top: 30%;
+    right: 6em;
+    */
+    color: black;
+    margin-right: 9em;
+    margin-left: auto;
+    margin-top: 10%;
+    width: 36em;
+    background-color: rgba(252, 255, 75, 0.45);/*rgba(13, 166, 250, 0.3);*//* rgba(169, 211, 221, 0.54);*/
+    border-radius: 1em;
+    border: 1px solid rgba(252, 255, 75, 1);
+    padding: 10px;
+}
+
+.right-data:hover {
+    background-color: rgba(252, 255, 75, 0.39);
+    cursor: pointer;
+}
+
+.left {
+    /*
+    position: absolute;
+    top: 30%;
+    right: 6em;
+    */
+    margin-left: 9em;
+    margin-top: 10%;
+    width: 36em;
+    background-color: rgba(179, 188, 197, 0.6);/* rgba(169, 211, 221, 0.54);*/
+    border-radius: 1em;
+    border: 1px solid rgba(179, 188, 197, 1);
+    padding: 10px;
+}
+
+.left:hover {
+    background-color: rgba(179, 188, 197, 0.51);
+    cursor: pointer;
+}
+
+
+#test{
+    background-image: url("../../../assets/images/tech6.jpg");
+    /* Full height */
+    height: 100vh; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    /* margin-bottom: 30px; */
+    /* border-bottom: 3px double white;  */
+}
+
 .about{
     color: white;
     background-image: url("../../../assets/images/tech3.jpg");
@@ -103,12 +183,13 @@ h2{
     margin-bottom: 30px;
     border-bottom: 3px double white; 
 }
+
+/*
 .about  h4{
     text-align: center;
 }
-.thunder-text{
-    margin-top: 18vh;
-}
+*/
+
 .nada{
     margin: auto;
     height: 10vh;
@@ -123,16 +204,16 @@ h2{
     border-bottom: none;
 }
 #navbar-about .navbar-brand{
-    color: rgb(255, 213, 0);
+    color: rgba(255, 173, 5); /*rgb(255, 213, 0);*/
 }
 #navbar-about a{
-    color: rgb(255, 213, 0);
+    color: rgba(255, 173, 5); /*rgb(255, 213, 0);*/
 }
 #navbar-about button .navbar-toggler-icon{
-    color: rgb(255, 213, 0);
+    color: rgba(255, 173, 5); /*rgb(255, 213, 0);*/
 }
 #navbar-about button .custom-toggler .navbar-toggler { 
-    border-color: rgb(255, 213, 0); 
+    border-color: rgba(255, 173, 5); /*rgb(255, 213, 0);*/
     border: 2px solid yellow;
 } 
 /* Setting the stroke to green using rgb values (0, 128, 0) */ 

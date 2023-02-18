@@ -1,11 +1,10 @@
 <div *ngIf="mapping==null;else updateTag">
     <div class="modal-header" >
-        <label>Cadastro de projeto</label>
+        <label>Cadastro de mapeamento</label>
         <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
     </div>
     <div class="modal-body text-center">
         <form #formNewMapping="ngForm">
-            //@Todo: Implementar line no back
             <div class="form-outline mb-4">
                 <label class="form-label" for="nome">Nome</label>
                 <input placeholder="Enter name" type="text" id="nome" name="nome" class="form-control"
@@ -26,12 +25,11 @@
 
 <ng-template #updateTag>
     <div class="modal-header" >
-        <label>Cadastro de projeto</label>
+        <label>Atualização de mapeamento</label>
         <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
     </div>
     <div class="modal-body text-center">
         <form #formMapping="ngForm">
-            //@Todo: Implementar line no back
             <div class="form-outline mb-4">
                 <label class="form-label" for="nome">Nome</label>
                 <input type="text" id="nome" name="nome" class="form-control"
@@ -39,7 +37,7 @@
             </div>
             <div class="form-outline mb-4">
                 <label class="form-label" for="mapping">Mapping</label>
-                <input placeholder="Enter Mapping" type="text" id="mapping" name="mapping" class="form-control"
+                <input placeholder="Enter Mapping" type="number" id="mapping" name="mapping" class="form-control"
                   [(ngModel)]="mappingToUpdate.mapping" #nome="ngModel">
             </div>
         </form>

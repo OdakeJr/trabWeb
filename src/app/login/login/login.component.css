@@ -23,6 +23,10 @@
     margin-top: 12px;
   }
 
+  .warning {
+    color: red;
+  }
+
   .bg-glass {
     background-color: hsla(0, 100%, 99%, 0.9) !important;
     backdrop-filter: saturate(200%) blur(25px);

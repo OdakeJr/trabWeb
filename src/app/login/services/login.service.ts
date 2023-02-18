@@ -9,7 +9,7 @@ const BASE_URL: string = 'http://localhost:8080/config/user'; //@TODO: global
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class LoginService { //@Todo: apply this  same localStorage consept in the routine executor software
 
   constructor(private http: HttpClient) { }
 

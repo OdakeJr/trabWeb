@@ -1,4 +1,4 @@
-import { BaseTag } from "./base-tag.model";
+import { BaseTag } from "./tags/base-tag.model";
 
 export class Routine {
     constructor(

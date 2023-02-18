@@ -99,7 +99,7 @@
 
 .hidden-project {
     display: grid;
-    grid-template-columns: 20% 68% 12%;
+    grid-template-columns: 20% 50% 30%;
     grid-template-areas:
     "id nome icon"
 }
@@ -150,6 +150,12 @@
 .show-btn {
     float: right;
     width: 3rem;
+}
+
+.disabled-btn {
+    float: right;
+    width: 6em;
+    margin-left: 4px;
 }
 
 @media only screen and (max-height: 550px) {

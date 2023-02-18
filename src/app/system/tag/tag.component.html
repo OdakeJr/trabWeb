@@ -31,10 +31,8 @@
     </nav>
     </div>
     <div class="wrapper">
-        <div class="box header">
-            <h1>Projeto x - Routine x - Tags</h1>
-        </div>
         <div class="box sidebar">
+            <label>@Todo: dont really know what to filter</label>
             <div class="input-group">
                 <div class="form-outline">
                   <input id="search-input" type="search" id="form1" class="form-control" placeholder="Search..."/>
@@ -45,13 +43,14 @@
             </div>
         </div>
         <div class="box content">
+            <h1 class="centered-text">Projeto {{project.line}} - Routine {{routine.line}} - Tags</h1>
             <div *ngFor="let tag of tags" >
                 <div class="document" *ngIf="tag.enabled==true;else disabled">
                     <div class="hidden-project" >
                         <div class="project-id"><p>Id: {{tag.line}}</p></div>
-                        <div class="project-nome">Nome: {{tag.nome}}</div>
-                        <div class="icon">
-                            <button type="button" class="btn btn-primary btn-block mb-4" (click)="openModal(tag)"><i class="bi bi-chevron-down"></i></button>
+                        <div class="project-nome">{{tag.simpleDescription}}</div>
+                        <div class="project-icon">
+                            <button type="button" class="btn btn-primary btn-block show-btn" (click)="openModal(tag)"><i class="bi bi-chevron-down"></i></button>
                         </div>
                     </div>
                 </div>
@@ -59,26 +58,29 @@
                     <div class="document" [attr.disabled]="true">
                         <div class="hidden-project" >
                             <div class="project-id"><p>Id: {{tag.line}}</p></div>
-                            <div class="project-nome">Nome: {{tag.nome}}</div>
-                            <div class="icon">
-                                <button type="button" class="btn btn-primary btn-block mb-4" (click)="remove(tag)">Remove</button>
-                                <button type="button" class="btn btn-primary btn-block mb-4" (click)="enable(tag)">Enable</button>
+                            <div class="project-nome">{{tag.simpleDescription}}</div>
+                            <div class="project-icon">
+                                <button type="button" class="btn btn-danger btn-block disabled-btn" (click)="remove(tag)">Remove</button>
+                                <button type="button" class="btn btn-primary btn-block disabled-btn" (click)="enable(tag)">Enable</button>
                             </div>
                         </div>
                     </div>
                 </ng-template>
             </div>
-            
             <div class="document">
                 <div class="hidden-project">
-                    <div class="project-id"><p>Id: add</p></div>
-                    <div class="project-nome">Nome: </div>
-                    <div class="icon">
-                        <button type="button" class="btn btn-primary btn-block mb-4" (click)="openAddModal()"><i class="bi bi-chevron-down"></i></button>
+                    <div class="project-id">Id: {{tags.length}}</div>
+                    <div class="project-nome">
+                        <div id="newTagDisplay">Nova Tag: </div>
+                        <select [(ngModel)]='selectedTag' class='form-control' name="selectedTag" id="selectedTag">
+                            <option *ngFor="let tagName of listOfTagName" value="{{tagName}}">{{tagName}}</option>
+                        </select>
+                    </div>
+                    <div class="project-icon">
+                        <button type="button" class="btn btn-success btn-block add-btn" (click)="openAddModal()">+</button>
                     </div>
                 </div>
             </div>
-    
         </div>
     </div>
 <div class="foot"></div>

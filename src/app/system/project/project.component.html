@@ -93,9 +93,9 @@
                         <div class="hidden-project" >
                             <div class="project-id">Id: {{project.line}}</div>
                             <div class="project-nome">Nome: {{project.nome}}</div>
-                            <div class="icon">
-                                <button type="button" class="btn btn-primary btn-block mb-4" (click)="remove(project)">Remove</button>
-                                <button type="button" class="btn btn-primary btn-block mb-4" (click)="enable(project)">Enable</button>
+                            <div class="project-icon">
+                                <button type="button" class="btn btn-danger btn-block disabled-btn" (click)="remove(project)">Remove</button>
+                                <button type="button" class="btn btn-primary btn-block disabled-btn" (click)="enable(project)">Enable</button>
                             </div>
                         </div>
                     </div>

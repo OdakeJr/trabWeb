@@ -56,8 +56,10 @@ export class ModalMappingComponent implements OnInit {
   }
 
   update():void {
+    let line = this.mapping.line
     this.mapping = this.formMapping.value
     this.mapping.enabled = true
+    this.mapping.line = line
     this.updateMapLocally(this.mapping)
     this.updateProjectLocally()
 
@@ -71,6 +73,7 @@ export class ModalMappingComponent implements OnInit {
   add():void {
     this.newMapping = this.formNewMapping.value
     this.newMapping.enabled = true
+    this.newMapping.line = this.mappings.length
     this.mappings.push(this.newMapping)
     //this.updateProjectLocally()
     this.project.mappings = this.mappings
