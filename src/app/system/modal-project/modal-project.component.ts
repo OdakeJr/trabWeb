@@ -13,6 +13,8 @@ import { ProjectService } from '../services/project.service';
 export class ModalProjectComponent implements OnInit {
   @Input() project!: Project
   @Input() projects!: Project[]
+  @Input() filterArray!: boolean[]
+  @Input() shownUsers!: number
   
   projectToUpdate!: Project
   newProject!: Project
@@ -43,7 +45,9 @@ export class ModalProjectComponent implements OnInit {
   }
 
   setProjectObj():void {
-    this.project = this.formProject.value
+    this.project.nome = this.formProject.value.nome
+    this.project.node = this.formProject.value.node
+    this.project.description = this.formProject.value.description
     this.project.enabled = true
     this.project.line = this.projectToUpdate.line
     console.log(this.formProject.value.keyWords)
@@ -64,10 +68,22 @@ export class ModalProjectComponent implements OnInit {
   add():void {
     this.setNewProjectObj()
     this.projectService.addProject(this.newProject).subscribe({
-      next: (data) => this.projects.push(this.newProject),
-      error: (err) => console.log(err)
+      next: (data) => {
+        this.projects.push(this.newProject)
+        //console.log(this.projects)
+        //console.log("exists? " + this.filterArray)
+        this.filterArray.push(true) //= new Array(this.projects.length).fill(true)
+        //console.log(this.filterArray)
+        //this.shownUsers = this.filterArray.filter(Boolean).length
+        //console.log(this.filterArray.length)
+        this.activeModal.close()
+      },
+      error: (err) => {
+        console.log(err)
+        this.activeModal.close()
+      }
     });
-    this.activeModal.close()
+    //this.activeModal.close()
   }
 
   setNewProjectObj():void {
@@ -76,6 +92,9 @@ export class ModalProjectComponent implements OnInit {
     this.newProject.keyWords = this.formNewProject.value.keyWords!.split(",")
     this.newProject.connections = this.formNewProject.value.connections!.split(",").map((el: string) => {return Number(el)})
     this.newProject.line = this.projects.length
+
+    //this.filterArray.push(true)
+    //this.shownUsers = this.filterArray.length
   }
 
   disable():void {
@@ -84,6 +103,6 @@ export class ModalProjectComponent implements OnInit {
       next: (data) => this.projects[this.project.line!] = this.project,
       error: (err) => console.log(err)
     });
-    this.activeModal.close()
+    this.activeModal.close("Ok")
   }
 }

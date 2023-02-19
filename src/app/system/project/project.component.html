@@ -38,23 +38,23 @@
         -->
         <div class="box sidebar">
             <div class="user-info-margin">
-                <label>Nome: Edson Odake</label><br>
-                <label>Cadastro: 7881</label><br>
-                <label>Perfil: Administrador</label>
+                <label>Nome: {{loggedUser.nome}}</label><br>
+                <label>Cadastro: {{loggedUser.cadastro}}</label><br>
+                <label>Perfil: {{loggedUser.perfil}}</label>
             </div>
             <hr>
     
-            <h3><i>Quantidade de projetos encontrados: 18</i></h3>
+            <h3><i>Quantidade de projetos encontrados: {{shownUsers}}</i></h3>
             <form #formFilter="ngForm">
                 <div class="row mb-4">
                     <div class="col-md-6">
                         <label for="idMin">ID min</label>
-                        <input placeholder="Filter id min" type="text" id="idMin" name="idMin" class="form-control"
+                        <input placeholder="Filter id min" type="number" id="idMin" name="idMin" class="form-control"
                                 [(ngModel)]="idMin" #id="ngModel">
                     </div>
                     <div class="col-md-6">
                         <label for="idMax">ID max</label>
-                        <input placeholder="Filter id max" type="text" id="idMax" name="idMax" class="form-control"
+                        <input placeholder="Filter id max" type="number" id="idMax" name="idMax" class="form-control"
                                 [(ngModel)]="idMax" #id="ngModel">
                     </div>
                 </div>
@@ -78,8 +78,11 @@
                     </div>
                 </div>
             </div>
-            <div *ngFor="let project of projects" >
-                <div class="document" *ngIf="project.enabled==true;else disabled">
+            <div *ngFor="let project of projects; let i = index" >
+                <div class="document" *ngIf="project.enabled==true && filterArray[i];else disabled">
+                    <!--
+                    <div>Resp: {{filterArray[i]}}: {{i}} =====> {{filterArray}}</div>
+                    -->
                     <div class="hidden-project" >
                         <div class="project-id">Id: {{project.line}}</div>
                         <div class="project-nome">Nome: {{project.nome}}</div>
@@ -89,7 +92,7 @@
                     </div>
                 </div>
                 <ng-template #disabled>
-                    <div class="document" [attr.disabled]="true">
+                    <div class="document" *ngIf="filterArray[i]" [attr.disabled]="true">
                         <div class="hidden-project" >
                             <div class="project-id">Id: {{project.line}}</div>
                             <div class="project-nome">Nome: {{project.nome}}</div>

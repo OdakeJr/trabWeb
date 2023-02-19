@@ -16,7 +16,7 @@ export class LoginService { //@Todo: apply this  same localStorage consept in th
   public isCredentialsValid(userRef: User, user: User): boolean {
 
     if(userRef.senha==user.senha && userRef.cadastro==user.cadastro) {
-      this.startUserSession(user)
+      this.startUserSession(userRef)
       return true
     }
     return false

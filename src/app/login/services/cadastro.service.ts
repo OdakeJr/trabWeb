@@ -17,10 +17,12 @@ export class CadastroService {
   }
 
   public updateUser(user: User): Observable<User> {
+    console.log(user)
     return this.http.put(`${BASE_URL} + ${user.line}`, user)
   }
 
   public addUser(user: User): Observable<User> {
+    console.log(user)
     return this.http.post(`${BASE_URL}`, user)
   }
 

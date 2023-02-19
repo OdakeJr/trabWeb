@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Routine, Project, TagEnum, One } from 'src/app/shared';
+import { Routine, Project, TagEnum, One, User } from 'src/app/shared';
 import { BaseTag } from 'src/app/shared/models/tags/base-tag.model';
 import { ModalRoutineComponent } from '../modal-routine/modal-routine.component';
 import { ModalTagComponent } from '../modal-tag/modal-tag.component';
@@ -9,6 +9,8 @@ import { ProjectService } from '../services/project.service';
 import { OneTagModalComponent } from '../tag-modals/one-tag-modal/one-tag-modal.component';
 import { ThreeTagModalComponent } from '../tag-modals/three-tag-modal/three-tag-modal.component';
 import { TwoTagModalComponent } from '../tag-modals/two-tag-modal/two-tag-modal.component';
+
+const LS_CHAVE: string = "userSession";
 
 @Component({
   selector: 'app-tag',
@@ -23,6 +25,15 @@ export class TagComponent implements OnInit {
   routine!: Routine
   project!: Project
 
+  idMin!: Number
+  idMax!: Number
+  nomeFilter!: string
+  positionFilter!: number
+  filterArray: boolean[] = []
+  shownUsers: number = 0
+
+  loggedUser: User = JSON.parse(localStorage[LS_CHAVE])
+
   constructor(private projectService: ProjectService, public router: Router, private activatedRoute: ActivatedRoute, private modalService: NgbModal) { }
 
   ngOnInit(): void {
@@ -32,6 +43,30 @@ export class TagComponent implements OnInit {
     console.log(this.routines)
     console.log(this.routine)
     console.log(this.tags)
+  }
+
+  filter() {
+    this.filterArray = []
+    for (let tag of this.tags) {
+      console.log("out")
+      console.log(tag)
+      console.log(this.nomeFilter)
+      console.log("idMax:"+this.idMax + " . idMin:" + this.idMin + " . userId:" + tag.line)
+      //console.log("in")
+      if (tag.nome?.includes(this.nomeFilter) || this.nomeFilter == null) {
+        if(tag.position==this.positionFilter || this.positionFilter == null) {
+          if ((tag.line! <= this.idMax && tag.line! >= this.idMin) || this.idMax==null || this.idMin==null) {
+            console.log("forthIf")
+            //console.log(user)
+            this.filterArray.push(true)
+            continue
+          }
+        }
+      }
+      this.filterArray.push(false)
+    }
+    console.log(this.filterArray)
+    this.shownUsers = this.filterArray.filter(Boolean).length
   }
 
   fillListOfTagName(): void {
@@ -66,6 +101,8 @@ export class TagComponent implements OnInit {
     if(this.routine.tag!=null) {
       this.tags = this.routine.tag
     }
+    this.filterArray = new Array(this.tags.length).fill(true)
+    this.shownUsers = this.filterArray.filter(Boolean).length
   }
 
   fillTags(): void {
@@ -101,7 +138,10 @@ export class TagComponent implements OnInit {
     this.updateProjectLocally()
     
     this.projectService.updateProject(this.project).subscribe({
-      next: (data) => 0,//this.mappings[mapping.line!] = mapping,
+      next: (data) => {
+        //this.mappings[mapping.line!] = mapping,
+        this.fillTags()
+      },
       error: (err) => console.log(err)
     });
   }
@@ -134,6 +174,23 @@ export class TagComponent implements OnInit {
       modalRef.componentInstance.routine = this.routine
       modalRef.componentInstance.routines = this.routines
       modalRef.componentInstance.project = this.project
+      
+      modalRef.componentInstance.filterArray = this.filterArray
+      modalRef.componentInstance.shownUsers = this.shownUsers
+      modalRef.result.then(
+        (result) => {
+
+          console.log(this.filterArray)
+          this.shownUsers = this.filterArray.filter(Boolean).length
+          console.log(this.shownUsers)
+          //console.log(this.projects);
+          //console.log(this.filterArray);
+          //console.log(this.shownUsers);
+        },
+        (reason) => {
+          //console.log(`Dismissed`);
+        }
+      );
     } else {
       alert("Choose a Tag Type")
     }
@@ -141,7 +198,7 @@ export class TagComponent implements OnInit {
 
 
 
-  getTagName(tagName: string): any{
+  getTagName(tagName: string): any{ //@Todo: Make it better or at least group some functions to override
     switch (tagName) {
       case "OneTag":
         return OneTagModalComponent

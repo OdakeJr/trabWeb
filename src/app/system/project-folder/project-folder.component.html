@@ -38,15 +38,15 @@
         --> 
         <div class="box sidebar">
             <div class="user-info-margin">
-                <label>Nome: Edson Odake</label><br>
-                <label>Cadastro: 7881</label><br>
-                <label>Perfil: Administrador</label>
+                <label>Nome: {{loggedUser.nome}}</label><br>
+                <label>Cadastro: {{loggedUser.cadastro}}</label><br>
+                <label>Perfil: {{loggedUser.perfil}}</label>
             </div>
             <hr>
             <div class="user-info-margin">
-                <label>Quantidade de Mappings: 6</label><br>
-                <label>Quantidade de Rotinas: 27</label><br>
-                <label>Quantidade de configurações: 0</label>
+                <label>Quantidade de Mappings: {{mappingNumber}}</label><br>
+                <label>Quantidade de Rotinas: {{routineNumber}}</label><br>
+                <label>Quantidade de configurações: {{configNumber}}</label>
             </div>
         </div>
         <div class="box content">

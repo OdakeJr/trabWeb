@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Project, Routine } from 'src/app/shared';
+import { Project, Routine, User } from 'src/app/shared';
 import { ModalProjectComponent } from '../modal-project/modal-project.component';
 import { ProjectService } from '../services/project.service';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalRoutineComponent } from '../modal-routine/modal-routine.component';
+
+const LS_CHAVE: string = "userSession";
 
 @Component({
   selector: 'app-routine',
@@ -17,10 +19,40 @@ export class RoutineComponent implements OnInit {
   routines: Routine[] = []
   project!: Project
 
+  idMin!: Number
+  idMax!: Number
+  nomeFilter!: string
+  filterArray: boolean[] = []
+  shownUsers: number = 0
+
+  loggedUser: User = JSON.parse(localStorage[LS_CHAVE])
+
   constructor(private projectService: ProjectService, public router: Router, private activatedRoute: ActivatedRoute, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.fillRoutines();
+  }
+
+  filter() {
+    this.filterArray = []
+    for (let routine of this.routines) {
+      console.log("out")
+      console.log(routine)
+      console.log(this.nomeFilter)
+      console.log("idMax:"+this.idMax + " . idMin:" + this.idMin + " . userId:" + routine.line)
+      //console.log("in")
+      if (routine.nome?.includes(this.nomeFilter) || this.nomeFilter == null) {
+        if ((routine.line! <= this.idMax && routine.line! >= this.idMin) || this.idMax==null || this.idMin==null) {
+          console.log("forthIf")
+          //console.log(user)
+          this.filterArray.push(true)
+          continue
+        }
+      }
+      this.filterArray.push(false)
+    }
+    console.log(this.filterArray)
+    this.shownUsers = this.filterArray.filter(Boolean).length
   }
 
   updateProjectLocally() {
@@ -46,6 +78,8 @@ export class RoutineComponent implements OnInit {
         if(data[0].routines!=null) {
           this.routines = data[0].routines//this.stringToObj(data.mappings!)
         }
+        this.filterArray = new Array(this.routines.length).fill(true)
+        this.shownUsers = this.filterArray.filter(Boolean).length
       },
       error: (err) => console.log(err)
     });
@@ -69,14 +103,17 @@ export class RoutineComponent implements OnInit {
   }
 
   remove(routine: Routine): void {
-    this.routines.splice(routine.line!, 1)
-    this.orderRoutinesByArrayAsc()
-    this.updateProjectLocally()
-    
-    this.projectService.updateProject(this.project).subscribe({
-      next: (data) => 0,//this.mappings[mapping.line!] = mapping,
-      error: (err) => console.log(err)
-    });
+    let text = "Tem certeza que deseja deletar essa rotina?";
+    if (confirm(text) == true) {
+      this.routines.splice(routine.line!, 1)
+      this.orderRoutinesByArrayAsc()
+      this.updateProjectLocally()
+      
+      this.projectService.updateProject(this.project).subscribe({
+        next: (data) => this.fillRoutines(),//this.mappings[mapping.line!] = mapping,
+        error: (err) => console.log(err)
+      });
+    }
   }
 
   openModal(routine: Routine) {
@@ -90,6 +127,22 @@ export class RoutineComponent implements OnInit {
     const modalRef = this.modalService.open(ModalRoutineComponent)
     modalRef.componentInstance.routines = this.routines
     modalRef.componentInstance.project = this.project
+    modalRef.componentInstance.filterArray = this.filterArray
+    modalRef.componentInstance.shownUsers = this.shownUsers
+    modalRef.result.then(
+      (result) => {
+
+        console.log(this.filterArray)
+        this.shownUsers = this.filterArray.filter(Boolean).length
+        console.log(this.shownUsers)
+        //console.log(this.projects);
+        //console.log(this.filterArray);
+        //console.log(this.shownUsers);
+      },
+      (reason) => {
+        //console.log(`Dismissed`);
+      }
+    );
   }
 }
 

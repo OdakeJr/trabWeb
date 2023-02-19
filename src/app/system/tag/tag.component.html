@@ -32,20 +32,49 @@
     </div>
     <div class="wrapper">
         <div class="box sidebar">
-            <label>@Todo: dont really know what to filter</label>
-            <div class="input-group">
-                <div class="form-outline">
-                  <input id="search-input" type="search" id="form1" class="form-control" placeholder="Search..."/>
-                </div>
-                <button id="search-button" type="button" class="btn btn-primary">
-                    <i class="bi bi-search"></i>
-                </button>
+            <div class="user-info-margin">
+                <label>Nome: {{loggedUser.nome}}</label><br>
+                <label>Cadastro: {{loggedUser.cadastro}}</label><br>
+                <label>Perfil: {{loggedUser.perfil}}</label>
             </div>
+            <hr>
+            <h3><i>Quantidade de tags encontradas: {{shownUsers}}</i></h3>
+            <form #formFilter="ngForm">
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <label for="idMin">ID min</label>
+                        <input placeholder="Filter id min" type="number" id="idMin" name="idMin" class="form-control"
+                                [(ngModel)]="idMin" #id="ngModel">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="idMax">ID max</label>
+                        <input placeholder="Filter id max" type="number" id="idMax" name="idMax" class="form-control"
+                                [(ngModel)]="idMax" #id="ngModel">
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="position">Position</label>
+                    <input placeholder="Filter position" type="number" id="positionFilter" name="position" class="form-control"
+                                  [(ngModel)]="positionFilter" #position="ngModel">
+                  </div>
+                <div class="form-group mb-4">
+                  <label for="nome">Tag Name</label>
+                  <select [(ngModel)]='nomeFilter' class='form-control' name="nomeFilter" id="nomeFilter">
+                    <option value=""></option>  
+                    <option *ngFor="let tagName of listOfTagName" value="{{tagName}}">{{tagName}}</option>
+                  </select>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" (click)="filter()">Filter</button>
+            </form>
         </div>
         <div class="box content">
             <h1 class="centered-text">Projeto {{project.line}} - Routine {{routine.line}} - Tags</h1>
-            <div *ngFor="let tag of tags" >
-                <div class="document" *ngIf="tag.enabled==true;else disabled">
+            <div *ngFor="let tag of tags; let i = index" >
+                <div class="document" *ngIf="tag.enabled==true && filterArray[i];else disabled">
+                    <!--
+                    <div>Resp: {{filterArray[i]}}: {{i}} =====> {{filterArray}}</div>
+                    -->
                     <div class="hidden-project" >
                         <div class="project-id"><p>Id: {{tag.line}}</p></div>
                         <div class="project-nome">{{tag.simpleDescription}}</div>
@@ -55,7 +84,7 @@
                     </div>
                 </div>
                 <ng-template #disabled>
-                    <div class="document" [attr.disabled]="true">
+                    <div class="document" *ngIf="filterArray[i]" [attr.disabled]="true">
                         <div class="hidden-project" >
                             <div class="project-id"><p>Id: {{tag.line}}</p></div>
                             <div class="project-nome">{{tag.simpleDescription}}</div>

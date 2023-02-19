@@ -38,23 +38,23 @@
     -->
     <div class="box sidebar">
         <div class="user-info-margin">
-            <label>Nome: Edson Odake</label><br>
-            <label>Cadastro: 7881</label><br>
-            <label>Perfil: Administrador</label>
+            <label>Nome: {{loggedUser.nome}}</label><br>
+            <label>Cadastro: {{loggedUser.cadastro}}</label><br>
+            <label>Perfil: {{loggedUser.perfil}}</label>
         </div>
         <hr>
 
-        <h3><i>Quantidade de registros encontrados: 18</i></h3>
+        <h3><i>Quantidade de registros encontrados: {{shownUsers}}</i></h3>
         <form #formFilter="ngForm">
             <div class="row mb-4">
                 <div class="col-md-6">
                     <label for="idMin">ID min</label>
-                    <input placeholder="Filter id min" type="text" id="idMin" name="idMin" class="form-control"
+                    <input placeholder="Filter id min" type="number" id="idMin" name="idMin" class="form-control"
                             [(ngModel)]="idMin" #id="ngModel">
                 </div>
                 <div class="col-md-6">
                     <label for="idMax">ID max</label>
-                    <input placeholder="Filter id max" type="text" id="idMax" name="idMax" class="form-control"
+                    <input placeholder="Filter id max" type="number" id="idMax" name="idMax" class="form-control"
                             [(ngModel)]="idMax" #id="ngModel">
                 </div>
             </div>
@@ -65,7 +65,7 @@
             </div>
             <div class="form-group mb-4">
               <label for="cadastro">Cadastro</label>
-              <input placeholder="Filter cadastro" type="text" id="cadastroFilter" name="cadastro" class="form-control"
+              <input placeholder="Filter cadastro" type="number" id="cadastroFilter" name="cadastro" class="form-control"
                             [(ngModel)]="userFilter.cadastro" #cadastro="ngModel">
             </div>
             <div class="form-group">
@@ -115,7 +115,7 @@
                         
                         <div class="col-md-4">
                             <label class="form-label" for="form3Example4">Perfil</label>
-                            <select [(ngModel)]='newUser.perfil' class='form-control' name="perfilNew" id="perfil">
+                            <select [(ngModel)]='newUser.perfil' class='form-control' name="perfil" id="perfil">
                                 <option *ngFor="let perfil of perfils" value="{{perfil}}">{{perfil}}</option>
                             </select>
                         </div>
@@ -132,67 +132,69 @@
                 </form>
             </div>
         </div>
-        <div *ngFor="let user of users" class="document">
-            <div class="hidden-user">
-                <div class="user-id">Id: {{user.line}}</div>
-                <div class="user-nome">Nome: {{user.nome}}</div>
-                <div class="user-icon">
-                    <button type="button" class="btn btn-primary btn-block show-btn" data-bs-toggle="collapse" [attr.data-bs-target]="'#user-content-' + user.line"><i class="bi bi-chevron-down"></i></button>
+        <div *ngFor="let user of users; let i = index">
+            <div *ngIf="filterArray[i]" class="document">
+                <div class="hidden-user">
+                    <div class="user-id">Id: {{user.line}}</div>
+                    <div class="user-nome">Nome: {{user.nome}}</div>
+                    <div class="user-icon">
+                        <button type="button" class="btn btn-primary btn-block show-btn" data-bs-toggle="collapse" [attr.data-bs-target]="'#user-content-' + user.line"><i class="bi bi-chevron-down"></i></button>
+                    </div>
                 </div>
-            </div>
-            <div id="info" class="collapse shown-user" [attr.id]="'user-content-' + user.line">
-                <hr>
-                <form #formUser="ngForm">
-                    <!-- Id input -->
-                    <input type="hidden" id="line" name="line" class="form-control"
-                        [(ngModel)]="user.line" #id="ngModel">
-                    
-                    <div class="row mb-4">
-                        <!-- Nome input -->
-                        <div class="col-md-10">
-                            <label class="form-label" for="nome">Nome</label>
-                            <input type="text" id="nome" name="nome" class="form-control"
-                            [(ngModel)]="user.nome" #nome="ngModel">
+                <div id="info" class="collapse shown-user" [attr.id]="'user-content-' + user.line">
+                    <hr>
+                    <form #formUser="ngForm">
+                        <!-- Id input -->
+                        <input type="hidden" id="line" name="line" class="form-control"
+                            [(ngModel)]="user.line" #id="ngModel">
+                        
+                        <div class="row mb-4">
+                            <!-- Nome input -->
+                            <div class="col-md-10">
+                                <label class="form-label" for="nome">Nome</label>
+                                <input type="text" id="nome" name="nome" class="form-control"
+                                [(ngModel)]="user.nome" #nome="ngModel">
+                            </div>
+
+                            <!-- Cadastro input -->
+                            <div class="col-md-2">
+                            <label class="form-label" for="cadastro">Cadastro</label>
+                            <input type="text" id="cadastro" name="cadastro" class="form-control"
+                                [(ngModel)]="user.cadastro" #cadastro="ngModel">
+                            </div>
                         </div>
 
-                        <!-- Cadastro input -->
-                        <div class="col-md-2">
-                        <label class="form-label" for="cadastro">Cadastro</label>
-                        <input type="text" id="cadastro" name="cadastro" class="form-control"
-                            [(ngModel)]="user.cadastro" #cadastro="ngModel">
-                        </div>
-                    </div>
+                        <div class="row">
+                            <!-- Password input -->
+                            <div class="col-md-8">
+                            <label class="form-label" for="form3Example4">Senha</label>
+                            <input type="password" id="senha" name="senha" class="form-control"
+                                [(ngModel)]="user.senha" #senha="ngModel">
+                            </div>
 
-                    <div class="row">
-                        <!-- Password input -->
-                        <div class="col-md-8">
-                        <label class="form-label" for="form3Example4">Senha</label>
-                        <input type="password" id="senha" name="senha" class="form-control"
-                            [(ngModel)]="user.senha" #senha="ngModel">
+                            <!-- Perfil input -->
+                            <div class="col-md-4">
+                                <label class="form-label" for="form3Example4">Perfil</label>
+                                <select [(ngModel)]='user.perfil' class='form-control' name="perfil" id="perfil">
+                                    <option *ngFor="let perfil of perfils" value="{{perfil}}">{{perfil}}</option>
+                                </select>
+                            </div>
                         </div>
-
-                        <!-- Perfil input -->
-                        <div class="col-md-4">
-                            <label class="form-label" for="form3Example4">Perfil</label>
-                            <select [(ngModel)]='user.perfil' class='form-control' name="perfil" id="perfil">
-                                <option *ngFor="let perfil of perfils" value="{{perfil}}">{{perfil}}</option>
-                            </select>
+                        <br>
+                        <div class="d-flex justify-content-center">
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary btn-block mb-4 " data-bs-toggle="collapse" [attr.data-bs-target]="'#user-content-' + user.line" (click)="update(user.line)">
+                                Atualizar
+                            </button>
+                            <button type="submit" id="cancel-btn" class="btn btn-primary btn-block mb-4" data-bs-toggle="collapse" [attr.data-bs-target]="'#user-content-' + user.line" (click)="cancel(user.line)">
+                                Cancelar
+                            </button>
+                            <button type="submit" class="btn btn-danger btn-block mb-4" data-bs-toggle="collapse" [attr.data-bs-target]="'#user-content-' + user.line" (click)="remove(user.line)">
+                                Remover
+                            </button>
                         </div>
-                    </div>
-                    <br>
-                    <div class="d-flex justify-content-center">
-                        <!-- Submit button -->
-                        <button type="submit" class="btn btn-primary btn-block mb-4 " data-bs-toggle="collapse" [attr.data-bs-target]="'#user-content-' + user.line" (click)="update(user.line)">
-                            Atualizar
-                        </button>
-                        <button type="submit" id="cancel-btn" class="btn btn-primary btn-block mb-4" data-bs-toggle="collapse" [attr.data-bs-target]="'#user-content-' + user.line" (click)="cancel(user.line)">
-                            Cancelar
-                        </button>
-                        <button type="submit" class="btn btn-danger btn-block mb-4" data-bs-toggle="collapse" [attr.data-bs-target]="'#user-content-' + user.line" (click)="remove(user.line)">
-                            Remover
-                        </button>
-                    </div>
-                  </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

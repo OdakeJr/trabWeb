@@ -13,6 +13,8 @@ export class ModalRoutineComponent implements OnInit {
   @Input() routine!: Routine
   @Input() routines!: Routine[]
   @Input() project!: Project
+  @Input() filterArray!: boolean[]
+  @Input() shownUsers!: number
   
   routineToUpdate!: Routine
   newRoutine!: Routine
@@ -80,10 +82,16 @@ export class ModalRoutineComponent implements OnInit {
     
 
     this.projectService.updateProject(this.project).subscribe({
-      next: (data) => 0,//this.mappings.push(this.newMapping),
-      error: (err) => console.log(err)
+      next: (data) => {
+        this.filterArray.push(true)//this.mappings.push(this.newMapping),
+        this.activeModal.close()
+      },
+      error: (err) => {
+        console.log(err)
+        this.activeModal.close()
+      }
     });
-    this.activeModal.close()
+    //this.activeModal.close()
   }
 
   disable():void {
