@@ -26,8 +26,8 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.loginService.getUserByCadastro(this.user.cadastro!).subscribe(data => {
       this.userReference = data[0];
-      console.log(this.userReference)
-      console.log(this.user)
+      console.log("REF: " + this.userReference)
+      console.log("usado:"+ this.user)
       if (this.formCliente.form.valid && this.loginService.isCredentialsValid(this.userReference!, this.user!)) {
         this.router.navigate(['home']);
       } else {

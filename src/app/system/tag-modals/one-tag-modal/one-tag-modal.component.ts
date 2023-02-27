@@ -24,6 +24,8 @@ export class OneTagModalComponent implements OnInit {
   newTag!: One
   enableFields!: boolean
 
+
+
   @ViewChild('formTag') formTag!: NgForm
   @ViewChild('formNewTag') formNewTag!: NgForm
 
@@ -63,6 +65,9 @@ export class OneTagModalComponent implements OnInit {
     if(this.tags==null) {
       this.tags = []
     }
+    if(this.tagToUpdate.registerName!="") {
+      document.getElementById('register')?.setAttribute("disabled", "disabled")
+    }
     //this.mappingToUpdate = JSON.parse(JSON.stringify(this.mapping))
   }
 
@@ -74,6 +79,7 @@ export class OneTagModalComponent implements OnInit {
     this.updateTagLocally(this.tag)
     this.updateProjectLocally()
 
+    console.log(this.project)
     this.projectService.updateProject(this.project).subscribe({
       next: (data) => this.tags[this.tag.line!] = this.tag,
       error: (err) => console.log(err)
@@ -82,6 +88,7 @@ export class OneTagModalComponent implements OnInit {
   }
   
   add():void {
+    console.log(this.formNewTag.value)
     this.newTag = this.formNewTag.value
     this.newTag.enabled = true
     this.newTag.line = this.tags.length
@@ -89,7 +96,7 @@ export class OneTagModalComponent implements OnInit {
     this.routine.tag = this.tags
     this.updateProjectLocally()
     
-
+    console.log(this.project)
     this.projectService.updateProject(this.project).subscribe({
       next: (data) => {
         this.filterArray.push(true),//this.mappings.push(this.newMapping),
@@ -112,4 +119,38 @@ export class OneTagModalComponent implements OnInit {
     });
     this.activeModal.close()
   }
+
+  setRegister():void {
+    if(this.tagToUpdate.registerName!="") {
+      for(let mapping of this.project.mappings!) {
+        if(this.tagToUpdate.registerName==mapping.nome) {
+          this.tagToUpdate.register = mapping.mapping
+        }
+      }
+      document.getElementById('register')?.setAttribute("disabled", "disabled")
+    } else {
+      this.tagToUpdate.register = ""
+      document.getElementById('register')?.removeAttribute("disabled");
+    }
+  }
+
+  setNewRegister():void {
+    if(this.newTag.registerName!="") {
+      for(let mapping of this.project.mappings!) {
+        if(this.newTag.registerName==mapping.nome) {
+          this.newTag.register = mapping.mapping
+        }
+      }
+      document.getElementById('newRegister')?.setAttribute("disabled", "disabled")
+    } else {
+      this.newTag.register = ""
+      document.getElementById('newRegister')?.removeAttribute("disabled");
+    }
+  }
+
+  /*
+  setMap():void {
+    this.project.mappings
+  }
+  */
 }

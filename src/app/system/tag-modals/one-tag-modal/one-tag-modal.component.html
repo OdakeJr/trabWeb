@@ -34,6 +34,41 @@
                 <input type="text" id="oneVariable" name="oneVariable" class="form-control"
                   [(ngModel)]="newTag.oneVariable" #oneVariable="ngModel">
             </div>
+
+            <div class="row mb-4">
+                <div class="col-md-9">
+                    <label class="form-label" for="registerName">Register Name</label>
+                    <select [(ngModel)]='newTag.registerName' class='form-control' name="registerName" id="registerNewName" (change)="setNewRegister()">
+                        <option value=""></option>  
+                        <option *ngFor="let mapping of project.mappings" value="{{mapping.nome}}">{{mapping.nome}}</option>
+                    </select>
+                    <!--
+                    <input type="text" id="registerName" name="registerName" class="form-control"
+                    [(ngModel)]="newTag.registerName" #registerName="ngModel">
+                    -->
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label" for="register">Register</label>
+                    <input type="text" id="newRegister" name="register" class="form-control"
+                    [(ngModel)]="newTag.register" #register="ngModel">
+                </div>
+            </div>
+
+            <!--
+            <div class="row mb-4">
+                <div class="col-md-9">
+                    <label class="form-label" for="registerName">Register Name</label>
+                    <input type="text" id="registerName" name="registerName" class="form-control"
+                    [(ngModel)]="newTag.registerName" #registerName="ngModel">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label" for="register">Register</label>
+                    <input type="text" id="register" name="register" class="form-control"
+                    [(ngModel)]="newTag.register" #register="ngModel">
+                </div>
+            </div>
+            -->
+
             <div id="info" class="collapse shown-user" [attr.id]="'hidden-fields'">
                 <hr>
                 <div class="row mb-4">
@@ -95,6 +130,26 @@
                 <input type="text" id="oneVariable" name="oneVariable" class="form-control"
                   [(ngModel)]="tagToUpdate.oneVariable" #oneVariable="ngModel">
             </div>
+
+            <div class="row mb-4">
+                <div class="col-md-9">
+                    <label class="form-label" for="registerName">Register Name</label>
+                    <select [(ngModel)]='tagToUpdate.registerName' class='form-control' name="registerName" id="registerName" (change)="setRegister()">
+                        <option value=""></option>  
+                        <option *ngFor="let mapping of project.mappings" value="{{mapping.nome}}">{{mapping.nome}}</option>
+                    </select>
+                    <!--
+                    <input type="text" id="registerName" name="registerName" class="form-control"
+                    [(ngModel)]="newTag.registerName" #registerName="ngModel">
+                    -->
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label" for="register">Register</label>
+                    <input type="text" id="register" name="register" class="form-control"
+                    [(ngModel)]="tagToUpdate.register" #newRegister="ngModel">
+                </div>
+            </div>
+
             <div id="info" class="collapse shown-user" [attr.id]="'hidden-fields'">
                 <hr>
                 <div class="row mb-4">
