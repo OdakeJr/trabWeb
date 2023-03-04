@@ -77,6 +77,7 @@ export class ProjectFolderComponent implements OnInit {
   }
 
   openConfigurations():void {
-
+    console.log("conf")
+    this.router.navigate(['usuario/cadastro/'])
   }
 }

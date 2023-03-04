@@ -8,6 +8,8 @@ export class BaseTag {
         public position?: number,
         public enabled?: boolean,
         public waitBefore?: number,
-        public waitAfter?: number
+        public waitAfter?: number,
+        public registerName?: string,
+        public register?: string
     ) {}
 } 

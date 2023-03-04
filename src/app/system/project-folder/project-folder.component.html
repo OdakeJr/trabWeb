@@ -38,22 +38,15 @@
         --> 
         <div class="box sidebar">
             <div class="user-info-margin">
-                <label>Nome: {{loggedUser.nome}}</label><br>
-                <label>Cadastro: {{loggedUser.cadastro}}</label><br>
-                <label>Perfil: {{loggedUser.perfil}}</label>
+                <label>Sistema de compras</label><br>
             </div>
             <hr>
-            <div class="user-info-margin">
-                <label>Quantidade de Mappings: {{mappingNumber}}</label><br>
-                <label>Quantidade de Rotinas: {{routineNumber}}</label><br>
-                <label>Quantidade de configurações: {{configNumber}}</label>
-            </div>
         </div>
         <div class="box content">
-            <h1 class="centered-text">Projeto {{projectId}}</h1>
+            <h1 class="centered-text">Loja {{projectId}}</h1>
             <div class="document">
                 <div class="hidden-project" >
-                    <div class="folder-name">Mappings</div>
+                    <div class="folder-name">Produtos</div>
                     <div class="folder-icon">
                         <button type="button" class="btn btn-primary btn-block entrar-btn" (click)="openMappings()">Entrar</button>
                     </div>
@@ -61,7 +54,7 @@
             </div>
             <div class="document">
                 <div class="hidden-project" >
-                    <div class="folder-name">Routines</div>
+                    <div class="folder-name">Pedidos</div>
                     <div class="folder-icon">
                         <button type="button" class="btn btn-primary btn-block entrar-btn" (click)="openRoutines()">Entrar</button>
                     </div>
@@ -69,7 +62,7 @@
             </div>
             <div class="document">
                 <div class="hidden-project" >
-                    <div class="folder-name">Configurations</div>
+                    <div class="folder-name">Clientes</div>
                     <div class="folder-icon">
                         <button type="button" class="btn btn-primary btn-block entrar-btn" (click)="openConfigurations()">Entrar</button>
                     </div>

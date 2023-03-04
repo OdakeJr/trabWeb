@@ -12,7 +12,7 @@ import { TagComponent } from './system/tag/tag.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'system',
     pathMatch: 'full'
   },
   {

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/shared';
 import { CadastroService } from '../services/cadastro.service';
 import * as PerfilUtil from 'src/app/shared/globals/perfil-util';
+import { ProjectService } from 'src/app/system/services/project.service';
 
 const LS_CHAVE: string = "userSession";
 
@@ -30,7 +31,7 @@ export class CadastroComponent implements OnInit {
 
   loggedUser: User = JSON.parse(localStorage[LS_CHAVE])
 
-  constructor(private cadastroService: CadastroService, public router: Router) { }
+  constructor(private projectService: ProjectService, private cadastroService: CadastroService, public router: Router) { }
 
   ngOnInit(): void {
     console.log(this.loggedUser)
@@ -119,6 +120,39 @@ export class CadastroComponent implements OnInit {
   }
 
   remove(line?: number): void {
+    this.projectService.getAllProjects().subscribe({
+      next: (data) => {
+        console.log("On remove")
+        if(this.pedidoExistNot(data, line)) {
+          this.removeFinal(line)
+        } else {
+          alert("Pedido vinculado ao CPF")
+        }
+      },
+      error: (err) => console.log(err)
+    });
+  }
+
+  pedidoExistNot(data: any, line?: number): boolean {
+
+    console.log(data[0].routines)
+    console.log(data)
+    for (let i = 0; i < data[0].routines.length; i++) {
+      console.log("rotNome")
+      console.log(data[0].routines[i].nome)
+      console.log("cadScrit")
+      console.log(this.users[line!].cadastro)
+
+      if (data[0].routines[i].nome==this.users[line!].cadastro) {
+        console.log("There is")
+        return false
+      }
+    }
+    console.log("There is not")
+    return true
+  }
+
+  removeFinal(line?: number): void {
     console.log(this.formCliente.value)
     this.cadastroService.remove(this.users[line!]).subscribe({
       next: (data) => {console.log(data); this.formNewCliente.form.reset(); this.fillUsers()},
@@ -126,5 +160,6 @@ export class CadastroComponent implements OnInit {
     });
     this.fillUsers()
   }
+
 
 }
