@@ -63,18 +63,6 @@
               <input placeholder="Filter name" type="text" id="nomeFilter" name="nome" class="form-control"
                             [(ngModel)]="userFilter.nome" #nome="ngModel">
             </div>
-            <div class="form-group mb-4">
-              <label for="cadastro">Cadastro</label>
-              <input placeholder="Filter cadastro" type="number" id="cadastroFilter" name="cadastro" class="form-control"
-                            [(ngModel)]="userFilter.cadastro" #cadastro="ngModel">
-            </div>
-            <div class="form-group">
-              <label for="perfil">Perfil</label>
-              <select [(ngModel)]='userFilter.perfil' class='form-control' name="perfil" id="perfil">
-                <option value=""></option>  
-                <option *ngFor="let perfil of perfils" value="{{perfil}}">{{perfil}}</option>
-              </select>
-            </div>
             <br>
             <button type="submit" class="btn btn-primary" (click)="filter()">Filter</button>
         </form>
@@ -109,7 +97,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <label class="form-label" for="form3Example4">Sobrenome</label>
-                            <input placeholder="Password" type="text" id="senhaNew" name="senha" class="form-control"
+                            <input placeholder="Sobrenome" type="text" id="senhaNew" name="senha" class="form-control"
                                 [(ngModel)]="newUser.senha" #senha="ngModel">
                         </div>
                     </div>

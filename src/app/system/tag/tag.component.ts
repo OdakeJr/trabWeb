@@ -45,7 +45,29 @@ export class TagComponent implements OnInit {
     console.log(this.tags)
   }
 
+  name: string[] = []
+  qnt: number[] = []
   filter() {
+    this.name = []
+    this.qnt = []
+    let tem
+    for (let tag of this. tags) {
+      tem = false
+      for(let i = 0; i < this.name.length; i++) {
+        if(tag.registerName==this.name[i]) {
+          this.qnt[i] += 1 
+          tem = true
+          break
+        }
+      }
+      if(!tem) {
+        this.name.push(tag.registerName!)
+        this.qnt.push(1)
+      }
+    }
+    console.log(this.name)
+    console.log(this.qnt)
+    /*
     this.filterArray = []
     for (let tag of this.tags) {
       console.log("out")
@@ -67,6 +89,7 @@ export class TagComponent implements OnInit {
     }
     console.log(this.filterArray)
     this.shownUsers = this.filterArray.filter(Boolean).length
+    */
   }
 
   fillListOfTagName(): void {
@@ -165,7 +188,8 @@ export class TagComponent implements OnInit {
   }
 
   openAddModal() {
-    if (this.selectedTag!="") {
+    if (true) {
+      this.selectedTag="OneTag"
       const modalRef = this.modalService.open(this.getTagName(this.selectedTag))
       //let modalRef = this.modalService.open(null)
       //eval("modalRef = this.modalService.open(" + this.selectedTag + "Component)")

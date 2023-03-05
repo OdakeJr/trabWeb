@@ -12,16 +12,8 @@ import { TagComponent } from './system/tag/tag.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'system',
+    redirectTo: 'system/0',
     pathMatch: 'full'
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'home',
-    component: HomeComponent
   },
   {
     path: 'usuario/cadastro',

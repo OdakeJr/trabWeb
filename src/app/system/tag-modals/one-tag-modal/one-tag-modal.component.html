@@ -6,36 +6,11 @@
     <div class="modal-body text-center">
         <form #formNewTag="ngForm">
             <div class="row mb-4">
-                <div class="col-md-9">
+                <div style="display: none" class="col-md-9">
                     <label class="form-label" for="nome">Nome</label>
                     <input type="text" id="nome" name="nome" class="form-control"
                     [(ngModel)]="newTag.nome" #nome="ngModel" readonly>
                 </div>
-                <div class="col-md-3">
-                    <label class="form-label" for="position">Position</label>
-                    <input type="text" id="position" name="position" class="form-control"
-                    [(ngModel)]="newTag.position" #position="ngModel">
-                </div>
-            </div>
-            <div class="form-outline mb-4">
-                <label class="form-label" for="simpleDescription">Simple description</label>
-                <input type="text" id="simpleDescription" name="simpleDescription" class="form-control"
-                  [(ngModel)]="newTag.simpleDescription" #simpleDescription="ngModel">
-            </div>
-            <div class="form-outline mb-4">
-                <label class="form-label" for="description">Description</label>
-                <textarea type="text" id="description" name="description" class="form-control"
-                  [(ngModel)]="newTag.description" #description="ngModel" cols="30" rows="3"></textarea>
-            </div>
-            
-            <hr>
-            <div class="form-outline mb-4">
-                <label class="form-label" for="oneVariable">One Variable</label>
-                <input type="text" id="oneVariable" name="oneVariable" class="form-control"
-                  [(ngModel)]="newTag.oneVariable" #oneVariable="ngModel">
-            </div>
-
-            <div class="row mb-4">
                 <div class="col-md-9">
                     <label class="form-label" for="registerName">Register Name</label>
                     <select [(ngModel)]='newTag.registerName' class='form-control' name="registerName" id="registerNewName" (change)="setNewRegister()">
@@ -102,35 +77,13 @@
     </div>
     <div class="modal-body text-center">
         <form #formTag="ngForm">
-            <div class="row mb-4">
+            <div style="display:none" class="row mb-4">
                 <div class="col-md-9">
                     <label class="form-label" for="nome">Nome</label>
                     <input type="text" id="nome" name="nome" class="form-control"
                     [(ngModel)]="tagToUpdate.nome" #nome="ngModel" readonly>
                 </div>
-                <div class="col-md-3">
-                    <label class="form-label" for="position">Position</label>
-                    <input type="text" id="position" name="position" class="form-control"
-                    [(ngModel)]="tagToUpdate.position" #position="ngModel">
-                </div>
             </div>
-            <div class="form-outline mb-4">
-                <label class="form-label" for="simpleDescription">Simple description</label>
-                <input type="text" id="simpleDescription" name="simpleDescription" class="form-control"
-                  [(ngModel)]="tagToUpdate.simpleDescription" #simpleDescription="ngModel">
-            </div>
-            <div class="form-outline mb-4">
-                <label class="form-label" for="description">Description</label>
-                <textarea type="text" id="description" name="description" class="form-control"
-                  [(ngModel)]="tagToUpdate.description" #nome="ngModel" cols="30" rows="3"></textarea>
-            </div>
-            <hr>
-            <div class="form-outline mb-4">
-                <label class="form-label" for="oneVariable">One Variable</label>
-                <input type="text" id="oneVariable" name="oneVariable" class="form-control"
-                  [(ngModel)]="tagToUpdate.oneVariable" #oneVariable="ngModel">
-            </div>
-
             <div class="row mb-4">
                 <div class="col-md-9">
                     <label class="form-label" for="registerName">Register Name</label>
@@ -149,7 +102,7 @@
                     [(ngModel)]="tagToUpdate.register" #newRegister="ngModel">
                 </div>
             </div>
-
+            <!--
             <div id="info" class="collapse shown-user" [attr.id]="'hidden-fields'">
                 <hr>
                 <div class="row mb-4">
@@ -167,6 +120,7 @@
                 <hr>
                 @Todo: Ens enble routine
             </div>
+            -->
         </form>
     </div>
     <div class="modal-footer">
